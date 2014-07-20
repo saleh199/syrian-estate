@@ -10,6 +10,10 @@ class property_model extends MY_Model
 	public $before_create = array( "timestampInsert" ); // observer before create row
 	public $before_update = array( "timestampUpdate" ); // observer before 
 
+	public $has_many = array(
+		"images" => array("model" => "property_image_model")
+	);
+
 	protected function timestampInsert($data){
 		$data["date_added"] = $data["date_modified"] = time();
 
