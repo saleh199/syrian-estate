@@ -25,7 +25,7 @@
     <script src="<?php echo base_url("assets/js/docs.min.js");?>"></script>
 
     <script src="<?php echo base_url("assets/js/app.js");?>"></script>
-    
+
   </head>
   <body <?php echo ($map) ? 'class="map"' : '';?>>
     <div class="container site-wrapper">
@@ -42,7 +42,7 @@
       			<li><a href="#">الصفحة الرئيسية</a></li>
       			<li><a href="#">عقارات للإيجار</a></li>
       			<li><a href="#">عقارات للبيع</a></li>
-      			<li class="pull-left"><a href="#">أضف عقارك</a></li>
+      			<li class="pull-left"><a href="#" id="menuAddHandler">أضف عقارك</a></li>
       		</ul>
       	</div>
       </div> <!-- /.menu -->
