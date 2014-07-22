@@ -1,88 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Syrian Estate</title>
 
-	<style type="text/css">
+    <!-- Bootstrap -->
+    <link href="<?php echo base_url("assets/css/bootstrap.min.css");?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/bootstrap-theme.min.css");?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/bootstrap-rtl.min.css");?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/main.css");?>" rel="stylesheet">
+    <link href="<?php echo base_url("assets/css/slider.css");?>" rel="stylesheet">
 
-	::selection{ background-color: #E13300; color: white; }
-	::moz-selection{ background-color: #E13300; color: white; }
-	::webkit-selection{ background-color: #E13300; color: white; }
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container site-wrapper">
+      <header class="row">
+        <div class="col-md-6 text-right"><img src="<?php echo base_url('assets/image/right1.png');?>" width="447px" height="114px"></div>
+        <div class="col-md-6 text-left">
+          <a href="#"><img src="<?php echo base_url('assets/image/left.png');?>" width="302px" height="110px"></a>
+        </div>
+      </header>
+      
+      <div class="row menu">
+      	<div class="col-md-12">
+      		<ul class="nav nav-pills">
+      			<li><a href="#">الصفحة الرئيسية</a></li>
+      			<li><a href="#">عقارات للإيجار</a></li>
+      			<li><a href="#">عقارات للبيع</a></li>
+      		</ul>
+      	</div>
+      </div> <!-- /.menu -->
 
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
+      <div class="row main">
+      	
+      	<div class="col-md-12 site-desc">
+      		<div class="jumbotron">
+      			<div class="container">
+      				<h1>عقارات سوريا</h1>
+      				<p>بوابتك الأولى للبحث عن العقار</p>
+      				<p><a class="btn btn-primary" role="button">تصفح الخريطة</a> <a class="btn btn-primary" role="button">بحث بالقائمة</a></p>
+      			</div>
+      		</div>
+      	</div> <!-- /.site-desc -->
 
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
+      	<div class="col-md-12 featured-projects">
+      		<div class="page-header">
+  				<h2>مشاريع عقارية</h2>
+			</div>
 
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
+			<div class="row">
+				<div class="col-md-3">
+					<div class="list-group">
+						<a href="#" class="list-group-item active">مشروع برج الريم</a>
+						<a href="#" class="list-group-item">Cras justo odio</a>
+						<a href="#" class="list-group-item">Cras justo odio</a>
+						<a href="#" class="list-group-item">Cras justo odio</a>
+						<a href="#" class="list-group-item">Cras justo odio</a>
+					</div>
+				</div>
 
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
+				<div class="col-md-9">
+					<div class="media">
+						<a class="pull-right" href="#">
+							<img class="media-object" src="holder.js@200x200" alt="...">
+						</a>
+						<div class="media-body">
+							<h4 class="media-heading">برج الريم</h4>
+							هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.
+						</div>
+					</div>
+				</div>
+			</div>
+      	</div> <!-- /.featured-projects -->
 
-	#body{
-		margin: 0 15px 0 15px;
-	}
-	
-	p.footer{
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-	
-	#container{
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		-webkit-box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
+      	<div class="col-md-12 featured-properties">
+      		<div class="page-header">
+  				<h2>عقارات مميزة</h2>
+			</div>
 
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+      		<div class="row">
+      			<div class="col-md-3">
+      				<div class="thumbnail">
+      					<img data-src="holder.js/210x210" alt="...">
+      					<div class="caption">
+      						<h3>عقار 1</h3>
+      					</div>
+      				</div>
+      			</div>
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+      			<div class="col-md-3">
+      				<div class="thumbnail">
+      					<img data-src="holder.js/210x210" alt="...">
+      					<div class="caption">
+      						<h3>عقار 1</h3>
+      					</div>
+      				</div>
+      			</div>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+      			<div class="col-md-3">
+      				<div class="thumbnail">
+      					<img data-src="holder.js/210x210" alt="...">
+      					<div class="caption">
+      						<h3>عقار 1</h3>
+      					</div>
+      				</div>
+      			</div>
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/welcome.php</code>
+      			<div class="col-md-3">
+      				<div class="thumbnail">
+      					<img data-src="holder.js/210x210" alt="...">
+      					<div class="caption">
+      						<h3>عقار 1</h3>
+      					</div>
+      				</div>
+      			</div>
+      		</div>
+      	</div> <!-- /.featured-properties -->
 
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
+      </div> <!-- /.main -->
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-</div>
-
+    </div> <!-- /.site-wrapper -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="<?php echo base_url("assets/js/jquery-1.11.1.min.js");?>"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="<?php echo base_url("assets/js/bootstrap.min.js");?>"></script>
+	<script src="<?php echo base_url("assets/js/docs.min.js");?>"></script>
 </body>
 </html>
