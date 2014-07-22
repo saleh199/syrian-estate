@@ -21,10 +21,17 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo base_url("assets/js/jquery-1.11.1.min.js");?>"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="<?php echo base_url("assets/js/bootstrap.min.js");?>"></script>
-    <script src="<?php echo base_url("assets/js/docs.min.js");?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/bootstrap.min.js");?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/docs.min.js");?>"></script>
 
-    <script src="<?php echo base_url("assets/js/app.js");?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/app.js");?>"></script>
+
+    <script type="text/javascript">
+      app.config = {
+        sitePath : '<?php echo site_url(); ?>',
+        assetsPath : '<?php echo base_url("assets"); ?>/'
+      };
+    </script>
 
   </head>
   <body <?php echo ($map) ? 'class="map"' : '';?>>

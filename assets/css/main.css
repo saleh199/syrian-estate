@@ -30,6 +30,10 @@ header {
 	margin-top: 20px;
 }
 
+.ajax-loader {
+	margin: 40px;
+}
+
 .btn-primary {
 	background-color: rgb(97, 28, 106);
 	border-color: rgb(66, 1, 76);
