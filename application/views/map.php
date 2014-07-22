@@ -40,5 +40,11 @@
       	</div> <!-- /.map-holder -->
 
       </div> <!-- /.main -->
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+      <script type="text/javascript">
+      	$(function(){
+      		app.mapInitialize("map-canvas");
+      	})
+      </script>
 
     <?php echo $this->view("layouts/footer"); ?>

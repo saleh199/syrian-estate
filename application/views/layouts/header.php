@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+ <?php echo doctype('html5') . "\n" ; ?>
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8">
@@ -17,6 +17,15 @@
       <script src="<?php echo base_url("assets/js/html5shiv.min.js");?>"></script>
       <script src="<?php echo base_url("assets/js/respond.min.js");?>"></script>
     <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="<?php echo base_url("assets/js/jquery-1.11.1.min.js");?>"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<?php echo base_url("assets/js/bootstrap.min.js");?>"></script>
+    <script src="<?php echo base_url("assets/js/docs.min.js");?>"></script>
+
+    <script src="<?php echo base_url("assets/js/app.js");?>"></script>
+    
   </head>
   <body <?php echo ($map) ? 'class="map"' : '';?>>
     <div class="container site-wrapper">
