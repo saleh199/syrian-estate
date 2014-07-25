@@ -34,6 +34,10 @@ header {
 	margin: 40px;
 }
 
+.progress-bar{
+	background-color: rgba(141, 35, 74, 0.77);
+}
+
 .btn-primary {
 	background-color: rgb(97, 28, 106);
 	border-color: rgb(66, 1, 76);

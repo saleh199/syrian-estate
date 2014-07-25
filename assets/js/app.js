@@ -52,4 +52,33 @@ $(function(){
 		map = new google.maps.Map(document.getElementById(arguments[0]), mapOptions);
 	}
 	/* end initialize search map */
+
+	app.initializeAddProperty = function(){
+		var $form 	= $('#addpropertyfrm'),
+			$bar	= $form.find('.progress-bar');
+		$form.ajaxForm({
+			dataType: 'JSON',
+			type: 'POST',
+			beforeSend: function(){
+				$bar.attr('aria-valuenow', 0);
+				$bar.width(0 + '%');
+				$bar.html(0 + '%');
+
+				$form.find('.progress').removeClass('hidden');
+			},
+			uploadProgress: function(event, position, total, percentComplete){
+				$bar.attr('aria-valuenow', percentComplete);
+				$bar.width(percentComplete + '%');
+				$bar.html(percentComplete + '%');
+			},
+			success: function(){
+				$bar.attr('aria-valuenow', 100);
+				$bar.width('100%');
+				$bar.html('100%');
+			},
+			complete: function(xhr){
+				$form.find('.progress').addClass('hidden');
+			}
+		});
+	}
 });

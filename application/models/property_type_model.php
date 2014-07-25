@@ -22,7 +22,14 @@ class property_type_model extends MY_Model
 		return $data;
 	}
 
-	public getPropertyTypeName($property_type_id){
+	public function dropdown(){
+		$this->_database->order_by('property_type_name' , 'ASC');
+		$list = parent::dropdown($this->primary_key, "property_type_name");
+
+		return $list;
+	}
+
+	public function getPropertyTypeName($property_type_id){
 		$result = $this->as_object()->get($property_type_id);
 		
 		return $result->property_type_name;

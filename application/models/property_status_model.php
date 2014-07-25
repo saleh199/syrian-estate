@@ -22,7 +22,14 @@ class property_status_model extends MY_Model
 		return $data;
 	}
 
-	public getPropertyTypeName($property_status_id){
+	public function dropdown(){
+		$this->_database->order_by('property_status_name' , 'ASC');
+		$list = parent::dropdown($this->primary_key, "property_status_name");
+
+		return $list;
+	}
+
+	public function getPropertyStatusName($property_status_id){
 		$result = $this->as_object()->get($property_status_id);
 		
 		return $result->property_status_name;

@@ -1,52 +1,59 @@
+          <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.form.js');?>"></script>
+          <script type="text/javascript">
+            app.initializeAddProperty();
+          </script>
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h5 class="modal-title">أضف عقارك</h5>
           </div>
           <div class="modal-body">
             <div class="row">
+            <?php echo $form_action; ?>
               <div class="col-md-6" style="border-left: 1px solid #CCC;">
                 <div class="form-group">
                   <label class="control-label">حالة العقار</label>
-                  <select class="form-control">
-                    <option>حالة العقار</option>
-                  </select>
+                  <?php echo $property_status_dropdown;?>
                 </div>
 
                 <div class="form-group">
                   <label class="control-label">نوع العقار</label>
-                  <select class="form-control">
-                    <option>نوع العقار</option>
-                  </select>
+                  <?php echo $property_type_dropdown;?>
                 </div>
 
                 <div class="form-group">
                   <label class="control-label">سعر العقار</label>
-                  <input type="text" class="form-control" placeholder="سعر العقار">
+                  <?php echo $price_input;?>
                 </div>
 
                 <div class="form-group">
                   <label class="control-label">وصف العقار</label>
-                  <textarea class="form-control" rows="4" placeholder="وصف العقار"></textarea>
+                  <?php echo $description_input;?>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label">المنطقة</label>
-                  <select class="form-control">
-                    <option>المنطقة</option>
-                  </select>
+                  <?php echo $zone_dropdown;?>
                 </div>
 
                 <div class="form-group">
                   <label class="control-label">صورة العقار</label>
-                  <input type="file" class="form-control" placeholder="صورة العقار">
+                  <?php echo $image_input;?>
+                </div>
+                <div>
+                  <div class="progress hidden">
+                    <div class="progress-bar "  role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                      70%
+                    </div>
+                  </div>
                 </div>
 
               </div>
+            <?php form_close();?>
             </div>
           </div>
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button> -->
-            <button type="button" class="btn btn-primary" id="addressFromBtn">تحديد على الخريطة</button>
+            <button type="button" class="btn btn-primary" id="addpropertyfrm">تحديد على الخريطة</button>
           </div>
