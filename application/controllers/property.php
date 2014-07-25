@@ -11,30 +11,33 @@ class Property extends CI_Controller {
 		$data["form_action"] = form_open_multipart('property/insert', array("id" => "addpropertyfrm"));
 
 		$property_status_data = $this->property_status->dropdown();
-		$data["property_status_dropdown"] = form_dropdown("property_status", $property_status_data, '', 'class="form-control"');
+		$data["property_status_dropdown"] = form_dropdown("property_status", $property_status_data, '', 'id="property_status" class="form-control"');
 
 		$property_type_data = $this->property_type->dropdown();
-		$data["property_type_dropdown"] = form_dropdown("property_type", $property_type_data, '', 'class="form-control"');
+		$data["property_type_dropdown"] = form_dropdown("property_type", $property_type_data, '', 'id="property_type" class="form-control"');
 
 		$data["price_input"] = form_input(array(
 			"type"	=> "text",
 			"name"	=> "price",
+			"id"	=> "price",
 			"class"	=> "form-control",
 			"placeholder" => "سعر العقار",
 		));
 
 		$data["description_input"] = form_textarea(array(
 			"name"	=> "description",
+			"id"	=> "description",
 			"class"	=> "form-control",
 			"placeholder" => "وصف العقار",
 			"rows"	=> 4
 		));
 
 		$zone_data = $this->zone->dropdown();
-		$data["zone_dropdown"] = form_dropdown("zone", $zone_data, '', 'class="form-control"');
+		$data["zone_dropdown"] = form_dropdown("zone_id", $zone_data, '', 'id="zone_id" class="form-control"');
 
 		$data["image_input"] = form_upload(array(
 			"name"	=> "image",
+			"id"	=> "image",
 			"class"	=> "form-control",
 			"placeholder" => "صورة العقار",
 		));
@@ -43,6 +46,29 @@ class Property extends CI_Controller {
 	}
 
 	public function insert(){
+		$this->load->library("form_validation");
+		$this->load->config("upload", TRUE);
+
+		$json = array();
+
+		$this->form_validation->set_rules('property_status', 'حالة العقار', 'trim|required');
+		$this->form_validation->set_rules('property_type', 'نوع العقار', 'trim|required');
+		$this->form_validation->set_rules('price', 'سعر العقار', 'trim|required');
+		$this->form_validation->set_rules('description', 'وصع العقار', 'trim|required');
+		$this->form_validation->set_rules('zone_id', 'المنطقة', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE){
+			$json["result"] = 'success';
+		}else{
+			$json["result"] = 'fail';
+			$json["errors"] = $this->form_validation->error_array();
+		}
+
+		$this->output->set_content_type("application/json");
+		$this->output->set_output(json_encode($json));
+	}
+
+	public function _upload_image(){
 
 	}
 }

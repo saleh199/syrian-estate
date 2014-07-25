@@ -10,6 +10,7 @@
             <div class="row">
             <?php echo $form_action; ?>
               <div class="col-md-6" style="border-left: 1px solid #CCC;">
+                <p class="text-danger">* جميع الحقول مطلوبة</p>
                 <div class="form-group">
                   <label class="control-label">حالة العقار</label>
                   <?php echo $property_status_dropdown;?>
@@ -55,5 +56,5 @@
           </div>
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button> -->
-            <button type="button" class="btn btn-primary" id="addpropertyfrm">تحديد على الخريطة</button>
+            <button type="button" class="btn btn-primary" id="addpropertybtn">تحديد على الخريطة</button>
           </div>

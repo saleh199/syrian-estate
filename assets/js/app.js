@@ -65,6 +65,7 @@ $(function(){
 				$bar.html(0 + '%');
 
 				$form.find('.progress').removeClass('hidden');
+				$form.find('.has-error').removeClass('has-error');
 			},
 			uploadProgress: function(event, position, total, percentComplete){
 				$bar.attr('aria-valuenow', percentComplete);
@@ -78,7 +79,18 @@ $(function(){
 			},
 			complete: function(xhr){
 				$form.find('.progress').addClass('hidden');
+				json = xhr.responseJSON;
+
+				if(json.result == 'fail'){
+					$.each(json.errors, function(index, value){
+						$form.find('#'+index).parent('div.form-group').addClass('has-error');
+					})
+				}
 			}
+		});
+
+		$('#addpropertybtn').on('click', function(){
+			$form.submit();
 		});
 	}
 });
