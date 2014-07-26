@@ -8,4 +8,6 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-application/assets/upload/
+application/assets/upload/*
+!application/assets/upload/index.html
+!application/assets/upload/.htaccess
