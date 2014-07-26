@@ -41,6 +41,21 @@ header {
 .text-danger,.text-danger, .text-danger:hover {
 	color: #8D234A;
 }
+.form-control:focus{
+	border-color: #A27EA7;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px #D2C7D3;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px #D2C7D3;
+}
+
+.has-error .form-control:focus {
+	border-color: #8D234A;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 6px #B75E7F;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 6px #B75E7F;
+}
+
+.has-error .form-control, .has-error .form-control:focus {
+	border: 1px solid #8D234A;
+}
 
 .btn-primary {
 	background-color: rgb(97, 28, 106);
