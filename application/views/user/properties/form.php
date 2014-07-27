@@ -2,15 +2,7 @@
 
       <div class="row main">
             
-            <div class="col-md-3 user-menu">
-                  <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#">عقاراتي</a></li>
-                        <li><a href="#">معلومات الحساب</a></li>
-                        <li><a href="#">تغيير كلمة المرور</a></li>
-                        <li><a href="#">مشاريع عقارية</a></li>
-                        <li><a href="#">تسجيل خروج</a></li>
-                  </ul>
-            </div> <!-- /.user-menu -->
+            <?php echo $this->view("user/user_menu"); ?>
 
             <div class="col-md-9">
                   <ol class="breadcrumb">
@@ -18,30 +10,78 @@
                         <li class="active">عقاراتي</li>
                   </ol>
 
-                  <div class="row property-list">
+                  <div class="row property-info">
                         <div class="col-md-12">
-                        <?php foreach($results as $item) { ?>
-                              <div class="media property-item">
-                                    <a href="<?php echo $item->images[0]->image_fullpath ;?>" class="pull-right">
-                                          <img src="<?php echo $item->images[0]->image_fullpath ;?>" class="media-object" width="100px" height="100px">
-                                    </a>
-                                    <div class="media-body">
-                                          <h4><?php echo $item->title;?></h4>
-                                          <b>السعر : </b> <?php echo $item->price;?> ل.س <br>
-                                          <b>المساحة : </b> <?php echo $item->area ;?>
-                                          
-                                                <button class="btn btn-primary btn-sm btn-edit"><span class="glyphicon glyphicon-pencil"></span> تعديل</button>
-
-                                                <button class="btn btn-danger btn-sm btn-delete"><span class="glyphicon glyphicon-remove"></span> حذف</button>
-
-                                                <span class="date-added" dir="ltr"><?php echo $item->date_added_human;?></span>
-                                          
+                              <?php echo $form_action;?>
+                                    <div class="form-group">
+                                          <label class="control-label col-md-2">عنوان الإعلان      :</label>
+                                          <div class="col-md-6">
+                                                <?php echo $input_title;?>
+                                          </div>
                                     </div>
-                              </div>
-                        <?php } ?>
+
+                                    <div class="form-group">
+                                          <label class="control-label col-md-2">حالة العقار :</label>
+                                          <div class="col-md-6">
+                                                <?php echo $dropdown_property_status;?>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <label class="control-label col-md-2">نوع العقار :</label>
+                                          <div class="col-md-6">
+                                                <?php echo $dropdown_property_type;?>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <label class="control-label col-md-2">سعر العقار :</label>
+                                          <div class="col-md-6">
+                                                <?php echo $input_price;?>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <label class="control-label col-md-2">مساحة العقار :</label>
+                                          <div class="col-md-6">
+                                                <?php echo $area_input;?>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <label class="control-label col-md-2">وصف العقار :</label>
+                                          <div class="col-md-6">
+                                                <?php echo $input_description;?>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <label class="control-label col-md-2">المنطقة</label>
+                                          <div class="col-md-6">
+                                                <?php echo $dropdown_zone;?>
+                                          </div>
+                                    </div>
+
+                                    <div class="row">
+                                          <div class="col-md-12 map-holder">
+                                                <div id="map-canvas"></div>
+                                          </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <div class="col-md-12">
+                                                <button class="btn btn-success"> حفظ </button>
+                                          </div>
+                                    </div>
+                              <?php echo form_close();?>
                         </div>
-                  </div>
+                  </div> <!-- /.property-info -->
             </div>
       </div> <!-- /.main -->
-
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+      <script type="text/javascript">
+            $(function(){
+                  app.mapInitialize("map-canvas");
+            })
+      </script>
     <?php echo $this->view("layouts/footer"); ?>

@@ -56,6 +56,16 @@ class property_model extends MY_Model
 			return $result;
 		}
 
-		return false;
+		return array();
+	}
+
+	public function userPropertyInfo($user_id, $property_id){
+		if(!empty($user_id) && $user_id != NULL){
+			$result = $this->with('images')->with('property_status')->with('property_type')->with('zone')->get_by(array("user_id" => intval($user_id), "property_id" => intval($property_id)));
+
+			return $result;
+		}
+
+		return array();
 	}
 }
