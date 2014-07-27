@@ -39,6 +39,13 @@ class property_model extends MY_Model
 
 		$data->date_added_human = unix_to_human($data->date_added, FALSE);
 		$data->date_modified_human = unix_to_human($data->date_modified, FALSE);
+
+		if(count($data->images) == 0){
+			$data->image = base_url('assets/image/not-available.jpg');
+		}else{
+			$data->image = $data->images[0]->image_fullpath;
+		}
+
 		return $data;
 	}
 

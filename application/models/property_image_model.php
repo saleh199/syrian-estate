@@ -27,8 +27,12 @@ class property_image_model extends MY_Model
 	protected function afterGet($data) {
 		$this->load->config('upload', TRUE);
 
-		$data->image_fullpath = base_url('assets/upload/' . $data->property_id . '/' . $data->filename);
-
+		if(!file_exists($this->config->item('upload_path', 'upload') . $data->property_id . '/' . $data->filename)){
+			$data->image_fullpath = base_url('assets/image/not-available.jpg');
+		}else{
+			$data->image_fullpath = base_url('assets/upload/' . $data->property_id . '/' . $data->filename);
+		}
+		
 		return $data;
 	}
 }
