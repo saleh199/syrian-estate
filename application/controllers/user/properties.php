@@ -11,8 +11,11 @@ class Properties extends CI_Controller {
 		echo __method__;
 	}
 
-	public function edit($property_id = 0){
-		echo __method__;
+	public function edit(){
+		$params = $this->uri->ruri_to_assoc(3);
+		if(!isset($params['property_id'])){
+			show_404();
+		}
 	}
 }
 
