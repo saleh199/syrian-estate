@@ -3,7 +3,7 @@ var app = {};
 $(function(){
 
 	function loadRemoteModal(url){
-		$("#modal").modal();
+		app.Modal.modal();
 		$("#modal-cache").load(
 			url,
 			function(){
@@ -21,14 +21,16 @@ $(function(){
 		html = html + '</div><!-- /.modal -->';
 		html = html + '<div id="modal-cache" class="hidden"></div>';
 		$("body").append(html);
+
+		app.Modal = $("#modal");
 		
 		// force modal to remove content on hidden
-		$('#modal').on('hidden.bs.modal', function () {
+		app.Modal.on('hidden.bs.modal', function () {
 			$(this).removeData('bs.modal');
 			$("#modal .modal-content").empty();
 		});
 
-		$('#modal').on('show.bs.modal', function(){
+		app.Modal.on('show.bs.modal', function(){
 			$("#modal .modal-content").html('<div class="ajax-loader text-center"><img src="'+ app.config.assetsPath +'image/ajax-loader.gif?ss" width="66px" height="66px"></div>');
 		});
 
@@ -56,41 +58,105 @@ $(function(){
 	app.initializeAddProperty = function(){
 		var $form 	= $('#addpropertyfrm'),
 			$bar	= $form.find('.progress-bar');
-		$form.ajaxForm({
-			dataType: 'JSON',
-			type: 'POST',
-			beforeSend: function(){
-				$bar.attr('aria-valuenow', 0);
-				$bar.width(0 + '%');
-				$bar.html(0 + '%');
 
-				$form.find('.progress').removeClass('hidden');
-				$form.find('.has-error').removeClass('has-error');
-			},
-			uploadProgress: function(event, position, total, percentComplete){
-				$bar.attr('aria-valuenow', percentComplete);
-				$bar.width(percentComplete + '%');
-				$bar.html(percentComplete + '%');
-			},
-			success: function(){
-				$bar.attr('aria-valuenow', 100);
-				$bar.width('100%');
-				$bar.html('100%');
-			},
-			complete: function(xhr){
-				$form.find('.progress').addClass('hidden');
-				json = xhr.responseJSON;
+		function validate(formData, jqForm, options){
+			$form.find('.has-error').removeClass('has-error');
+			$form.find('input, select, textarea').tooltip('destroy');
 
-				if(json.result == 'fail'){
-					$.each(json.errors, function(index, value){
-						$form.find('#'+index).parent('div.form-group').addClass('has-error');
-					})
+			var form = jqForm[0];
+			if(!form.property_status.value){
+				jQuery(form.property_status).parent('div.form-group').addClass('has-error');
+				jQuery(form.property_status).tooltip({
+					title : 'مطلوب'
+				}).tooltip('show');
+			}
+
+			if(!form.property_type.value){
+				jQuery(form.property_type).parent('div.form-group').addClass('has-error');
+				jQuery(form.property_type).tooltip({
+					title : 'مطلوب'
+				}).tooltip('show');
+			}
+
+			if(!form.price.value){
+				jQuery(form.price).parent('div.form-group').addClass('has-error');
+				jQuery(form.price).tooltip({
+					title : 'مطلوب'
+				}).tooltip('show');
+			}else{
+				if((!isNaN(parseFloat(form.price.value)) && isFinite(form.price.value)) == false){
+					jQuery(form.price).parent('div.form-group').addClass('has-error');
+					jQuery(form.price).tooltip({
+						title : 'السعر يجب أن يكون صحيح'
+					}).tooltip('show');
 				}
 			}
-		});
 
-		$('#addpropertybtn').on('click', function(){
-			$form.submit();
+			if(!form.description.value){
+				jQuery(form.description).parent('div.form-group').addClass('has-error');
+				jQuery(form.description).tooltip({
+					title : 'مطلوب'
+				}).tooltip('show');
+			}
+
+			if(!form.image.value){
+				jQuery(form.image).parent('div.form-group').addClass('has-error');
+				jQuery(form.image).tooltip({
+					title : 'مطلوب'
+				}).tooltip('show');
+			}
+
+			if($form.find('.has-error').length > 0){
+				return false;
+			}
+
+			return true;
+		}
+
+		$(function(){
+			$form.ajaxForm({
+				dataType: 'JSON',
+				type: 'POST',
+				beforeSubmit: validate,
+				beforeSend: function(){
+					$bar.attr('aria-valuenow', 0);
+					$bar.width(0 + '%');
+					$bar.html(0 + '%');
+
+					$form.find('.progress').removeClass('hidden');
+				},
+				uploadProgress: function(event, position, total, percentComplete){
+					$bar.attr('aria-valuenow', percentComplete);
+					$bar.width(percentComplete + '%');
+					$bar.html(percentComplete + '%');
+				},
+				success: function(){
+					$bar.attr('aria-valuenow', 100);
+					$bar.width('100%');
+					$bar.html('100%');
+				},
+				complete: function(xhr){
+					console.log(xhr.responseJSON);
+					$form.find('.progress').addClass('hidden');
+					json = xhr.responseJSON;
+
+					if(json.result == 'fail'){
+						$.each(json.errors, function(index, value){
+							if(index == 'alert'){
+								alert(value);
+							}else{
+								$form.find('#'+index).parent('div.form-group').addClass('has-error');
+							}
+						})
+					}else if(json.result == 'success'){
+						app.Modal.modal('hide');
+					}
+				}
+			});
+
+			$('#addpropertybtn').on('click', function(){
+				$form.submit();
+			});
 		});
 	}
 });

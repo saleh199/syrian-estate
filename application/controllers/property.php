@@ -11,10 +11,10 @@ class Property extends CI_Controller {
 		$data["form_action"] = form_open_multipart('property/insert', array("id" => "addpropertyfrm"));
 
 		$property_status_data = $this->property_status->dropdown();
-		$data["property_status_dropdown"] = form_dropdown("property_status", $property_status_data, '', 'id="property_status" class="form-control"');
+		$data["property_status_dropdown"] = form_dropdown("property_status_id", $property_status_data, '', 'id="property_status" class="form-control"');
 
 		$property_type_data = $this->property_type->dropdown();
-		$data["property_type_dropdown"] = form_dropdown("property_type", $property_type_data, '', 'id="property_type" class="form-control"');
+		$data["property_type_dropdown"] = form_dropdown("property_type_id", $property_type_data, '', 'id="property_type" class="form-control"');
 
 		$data["price_input"] = form_input(array(
 			"type"	=> "text",
@@ -46,19 +46,54 @@ class Property extends CI_Controller {
 	}
 
 	public function insert(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+		}
+
 		$this->load->library("form_validation");
-		$this->load->config("upload", TRUE);
+		$this->load->model('property_model');
+		$this->load->model('property_image_model', 'property_image');
 
 		$json = array();
 
-		$this->form_validation->set_rules('property_status', 'حالة العقار', 'trim|required');
-		$this->form_validation->set_rules('property_type', 'نوع العقار', 'trim|required');
+		$this->form_validation->set_rules('property_status_id', 'حالة العقار', 'trim|required');
+		$this->form_validation->set_rules('property_type_id', 'نوع العقار', 'trim|required');
 		$this->form_validation->set_rules('price', 'سعر العقار', 'trim|required');
 		$this->form_validation->set_rules('description', 'وصع العقار', 'trim|required');
 		$this->form_validation->set_rules('zone_id', 'المنطقة', 'trim|required');
+		$this->form_validation->set_rules('image', 'صورة العقار', 'callback__upload_image');
 
 		if ($this->form_validation->run() == TRUE){
-			$json["result"] = 'success';
+			$uploadData = $this->upload->data();
+			$data = $this->input->post(NULL, TRUE);
+			unset($data[$this->config->item("csrf_token_name")]);
+
+			$data["user_id"] = 1;
+			if($inserted = $this->property_model->insert($data)) {
+				$data = array(
+					"filename"	=>	$uploadData['file_name'],
+					"orig_name"	=>	$uploadData['orig_name'],
+					"property_id" => $inserted,
+				);
+
+				if($this->property_image->insert($data)){
+					$upload_path = $this->config->item("upload_path", 'upload');
+
+					$property_directory = $upload_path . $inserted . '/';
+					mkdir($property_directory, 0777, TRUE);
+
+					if(@copy($uploadData["full_path"], $property_directory . $uploadData['file_name'])){
+						unlink($uploadData["full_path"]);
+					}
+				}
+
+				$json["result"] = 'success';
+				$json["inserted"] = $inserted;
+			}else{
+				$json["result"] = 'fail';
+				$json["errors"] = array('alert' => 'حدث خطأ أثناء عملية الإضافة');
+			}
+
 		}else{
 			$json["result"] = 'fail';
 			$json["errors"] = $this->form_validation->error_array();
@@ -69,7 +104,22 @@ class Property extends CI_Controller {
 	}
 
 	public function _upload_image(){
+		$this->load->config("upload", TRUE);
+		$this->load->library('upload');
 
+		$config = $this->config->item('upload');
+
+		$config['upload_path']	.= 'tmp/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+
+		$this->upload->initialize($config);
+
+		if(!$this->upload->do_upload('image')){
+			$this->form_validation->set_message('_upload_image', $this->upload->error_msg[0]);
+			return FALSE;
+		}else{
+			return TRUE;
+		}
 	}
 }
 
