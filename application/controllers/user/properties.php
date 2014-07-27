@@ -4,7 +4,11 @@ class Properties extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('user/properties/list');
+		$this->load->model('property_model');
+
+		$data["results"] = $this->property_model->userPropertyList(1);
+
+		$this->load->view('user/properties/list', $data);
 	}
 
 	public function add(){
@@ -16,6 +20,8 @@ class Properties extends CI_Controller {
 		if(!isset($params['property_id'])){
 			show_404();
 		}
+
+		
 	}
 }
 

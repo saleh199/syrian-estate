@@ -8,7 +8,9 @@ class property_image_model extends MY_Model
 	public $protected_attributes = array("property_image_id");
 
 	public $before_create = array( "timestampInsert" ); // observer before create row
-	public $before_update = array( "timestampUpdate" ); // observer before 
+	public $before_update = array( "timestampUpdate" ); // observer before update
+
+	public $after_get = array( "afterGet" );
 
 	protected function timestampInsert($data){
 		$data["date_added"] = $data["date_modified"] = time();
@@ -18,6 +20,14 @@ class property_image_model extends MY_Model
 
 	protected function timestampUpdate($data){
 		$data["date_modified"] = time();
+
+		return $data;
+	}
+
+	protected function afterGet($data) {
+		$this->load->config('upload', TRUE);
+
+		$data->image_fullpath = base_url('assets/upload/' . $data->property_id . '/' . $data->filename);
 
 		return $data;
 	}

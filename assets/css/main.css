@@ -226,11 +226,31 @@ a:hover, a:focus{
 	border-right: 1px solid #ccc;
 }
 .property-list .property-item{
-	background-color: #FAFAFA;
+	background-color: #F8F8F8;
 	padding: 10px;
 	margin-bottom: 10px;
+	position: relative;
+}
+
+.property-list .property-item .btn-edit,
+.property-list .property-item .btn-delete{
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
 }
 
 .property-list .property-item .btn-delete {
-	margin-left: 10px;
+	left: 90px;
+}
+
+.property-list .property-item .date-added{
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #fff;
+	padding: 6px;
+	font-size: 11px;
+	color: #aaa;
+	border-bottom-right-radius: 8px;
 }
