@@ -26,6 +26,14 @@ body{
 header {
 	background: url(../image/footer-bg.jpg);
 }
+
+a{
+	color: #82488A;
+}
+
+.btn-link, .btn-link:hover, .btn-link:focus {
+	color: #82488A;
+}
 .page-header{
 	margin-top: 20px;
 }
@@ -90,6 +98,14 @@ header {
 
 .map .site-wrapper {
 	width: 1200px;
+}
+
+.user-top {
+	height: 36px;
+}
+
+.user-top .btn-link {
+	font-size: 11px;
 }
 
 .main {

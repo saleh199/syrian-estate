@@ -36,6 +36,12 @@
   </head>
   <body <?php echo ($map) ? 'class="map"' : '';?>>
     <div class="container site-wrapper">
+      <div class="row user-top">
+        <div class="col-md-12">
+          <a href="#" class="btn btn-link">دخول</a> |
+          <a href="#" class="btn btn-link">تسجيل جديد</a>
+        </div>
+      </div>
       <header class="row">
         <div class="col-md-6 text-right"><img src="<?php echo base_url('assets/image/right1.png');?>" width="447px" height="114px"></div>
         <div class="col-md-6 text-left">
@@ -46,7 +52,7 @@
       <div class="row menu">
       	<div class="col-md-12">
       		<ul class="nav nav-pills">
-      			<li><a href="#">الصفحة الرئيسية</a></li>
+      			<li><a href="<?php echo site_url(); ?>">الصفحة الرئيسية</a></li>
       			<li><a href="#">عقارات للإيجار</a></li>
       			<li><a href="#">عقارات للبيع</a></li>
       			<li class="pull-left"><a href="#" id="menuAddHandler">أضف عقارك</a></li>
