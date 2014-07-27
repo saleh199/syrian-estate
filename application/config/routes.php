@@ -41,6 +41,10 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+$route['user'] = 'user/properties';
+$route['user/properties/add'] = 'user/properties/add';
+$route['user/properties/edit/(:num)'] = 'user/properties/edit/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
