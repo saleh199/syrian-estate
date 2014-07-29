@@ -44,16 +44,46 @@ $(function(){
 	};
 
 	/* start initialize search map */
-	app.mapInitialize = function (){
+	app.mapInitialize = function (mapCanvas, options, _zoom_changed){
+		if(options.lat & options.lng){
+			var center = new google.maps.LatLng(options.lat,options.lng);
+			zoom = options.zoom;
+		}else{
+			var center = new google.maps.LatLng(32.7129167,36.5491359);
+			zoom = 13;
+		}
+
 		var mapOptions = {
-			center: new google.maps.LatLng(32.7129167,36.5491359),
-			zoom: 7,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+			center: center,
+			zoom: zoom,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			streetViewControl : false,
+			overviewMapControl: false
 		};
 
-		map = new google.maps.Map(document.getElementById(arguments[0]), mapOptions);
+		//console.log(mapOptions);
+
+		app.map = new google.maps.Map(document.getElementById(mapCanvas), mapOptions);
+
+		if(typeof(_zoom_changed) == "function"){
+			google.maps.event.addListener(app.map, 'zoom_changed', function() {
+				_zoom_changed.call(window, app.map.getZoom());
+			});
+		}
 	}
 	/* end initialize search map */
+
+	app.addMarker = function(markerOpt, _dragend_callback){
+		console.log(markerOpt);
+		marker = new google.maps.Marker(markerOpt);
+		app.marker = marker;
+
+		if(typeof(_dragend_callback) == "function"){
+			google.maps.event.addListener(marker, 'dragend', function(){
+				_dragend_callback.call(window, marker.getPosition());
+			});
+		}
+	}
 
 	app.initializeAddProperty = function(){
 		var $form 	= $('#addpropertyfrm'),

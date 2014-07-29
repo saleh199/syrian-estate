@@ -5,7 +5,7 @@ class property_model extends MY_Model
 	public $_table = "property";
 	public $primary_key = "property_id";
 
-	public $protected_attributes = array("property_id");
+	public $protected_attributes = array("property_id", "status");
 
 	public $before_create = array( "timestampInsert" ); // observer before create row
 	public $before_update = array( "timestampUpdate" ); // observer before update

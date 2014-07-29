@@ -27,6 +27,15 @@
                                     <?php echo $hidden_map_lat;?>
                                     <?php echo $hidden_map_lng;?>
                                     <?php echo $hidden_map_zoom;?>
+                                    <?php if(isset($errors)) { ?>
+                                    <div class="alert alert-danger" role="alert">
+                                          <?php echo $errors;?>
+                                    </div>
+                                    <?php }elseif (isset($success)) { ?>
+                                    <div class="alert alert-success" role="alert">
+                                          <?php echo $success;?>
+                                    </div>
+                                    <?php } ?>
                                           <div class="form-group">
                                                 <label class="control-label col-md-2">عنوان الإعلان      :</label>
                                                 <div class="col-md-6">
@@ -70,6 +79,20 @@
                                           </div>
 
                                           <div class="form-group">
+                                                <label class="control-label col-md-2">العنوان :</label>
+                                                <div class="col-md-6">
+                                                      <?php echo $input_address;?>
+                                                </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                                <label class="control-label col-md-2">الخدمات الملحقة :</label>
+                                                <div class="col-md-6">
+                                                      <?php echo $input_services;?>
+                                                </div>
+                                          </div>
+
+                                          <div class="form-group">
                                                 <label class="control-label col-md-2">المنطقة</label>
                                                 <div class="col-md-6">
                                                       <?php echo $dropdown_zone;?>
@@ -84,7 +107,7 @@
 
                                           <div class="form-group">
                                                 <div class="col-md-12">
-                                                      <button class="btn btn-success"> حفظ </button>
+                                                      <button type="submit" class="btn btn-success"> حفظ </button>
                                                 </div>
                                           </div>
                                     <?php echo form_close();?>
@@ -98,7 +121,26 @@
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.16&language=ar"></script>
       <script type="text/javascript">
             $(function(){
-                  app.mapInitialize("map-canvas");
+                  var center = {};
+
+                  if($("#propertyfrm input[name=map_lat]").val() != '' && $("#propertyfrm input[name=map_lng]").val() != ''){
+                        center.lat = $("#propertyfrm input[name=map_lat]").val();
+                        center.lng = $("#propertyfrm input[name=map_lng]").val();
+                        center.zoom = parseInt($("#propertyfrm input[name=map_zoom]").val());
+                  }
+
+                  app.mapInitialize("map-canvas", center, function(zoom){
+                        $("#propertyfrm input[name=map_zoom]").val(zoom);
+                  });
+
+                  app.addMarker({
+                        position : app.map.getCenter(),
+                        map: app.map,
+                        draggable : true
+                  }, function (latlng){
+                        $("#propertyfrm input[name=map_lat]").val(latlng.lat());
+                        $("#propertyfrm input[name=map_lng]").val(latlng.lng());
+                  });
             })
       </script>
     <?php echo $this->view("layouts/footer"); ?>
