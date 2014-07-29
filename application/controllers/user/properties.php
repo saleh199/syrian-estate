@@ -16,7 +16,7 @@ class Properties extends CI_Controller {
 
 		$this->load->view('user/properties/list', $data);
 	}
-
+ 
 	public function add(){
 		echo __method__;
 	}
@@ -144,6 +144,36 @@ class Properties extends CI_Controller {
 
 		$zone_data = $this->zone->dropdown();
 		$data["dropdown_zone"] = form_dropdown("zone_id", $zone_data, $zone_id, 'id="zone_id" class="form-control"');
+
+		if(isset($property_info->map_lat)){
+			$map_lat = $property_info->map_lat;
+		}elseif(isset($postData["map_lat"])){
+			$map_lat = $postData["map_lat"];
+		}else{
+			$map_lat = '';
+		}
+
+		$data["hidden_map_lat"] = form_hidden("map_lat", $map_lat);
+
+		if(isset($property_info->map_lng)){
+			$map_lng = $property_info->map_lng;
+		}elseif(isset($postData["map_lng"])){
+			$map_lng = $postData["map_lng"];
+		}else{
+			$map_lng = '';
+		}
+
+		$data["hidden_map_lng"] = form_hidden("map_lng", $map_lng);
+
+		if(isset($property_info->map_zoom)){
+			$map_zoom = $property_info->map_zoom;
+		}elseif(isset($postData["map_zoom"])){
+			$map_zoom = $postData["map_zoom"];
+		}else{
+			$map_zoom = '';
+		}
+
+		$data["hidden_map_zoom"] = form_hidden("map_zoom", $map_zoom);
 
 		$this->load->view('user/properties/form', $data);
 	}
