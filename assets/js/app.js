@@ -24,7 +24,7 @@ $(function(){
 
 		app.Modal = $("#modal");
 		
-		// force modal to remove content on hidden
+		/*  force modal to remove content on hidden */
 		app.Modal.on('hidden.bs.modal', function () {
 			$(this).removeData('bs.modal');
 			$("#modal .modal-content").empty();
@@ -61,7 +61,7 @@ $(function(){
 			overviewMapControl: false
 		};
 
-		//console.log(mapOptions);
+		/* console.log(mapOptions); */
 
 		app.map = new google.maps.Map(document.getElementById(mapCanvas), mapOptions);
 
@@ -198,7 +198,7 @@ $(function(){
 			$form.ajaxForm({
 				dataType: 'JSON',
 				type: 'POST',
-				//beforeSubmit: validate,
+				/* beforeSubmit: validate, */
 				beforeSend: function(){
 					$bar.attr('aria-valuenow', 0);
 					$bar.width(0 + '%');
@@ -270,5 +270,37 @@ $(function(){
 		});
 	}
 
+
+	app.initializeMapSearch = function(_formId){
+		var $form = $(_formId);
+
+		$(window).on("hashchange", function(){
+			if(location.hash.length > 0){
+				params = $.parseParams(location.hash);
+				console.log(params);
+
+				$.ajax({
+					url : app.mapSearchURL,
+					dataType : 'json',
+					type : 'get',
+					success : function(){
+	
+					},
+					complete : function(xhr){
+						console.log(xhr);
+					}
+				});
+			}
+		});
+
+		$(window).on('load', function(){
+			$(window).trigger('hashchange');
+		});
+
+		$('#mapsearchbtn').click(function(){
+			querystring = $form.serialize();
+			location.hash = querystring;
+		});
+	}
 
 });

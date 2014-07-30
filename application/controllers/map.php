@@ -8,7 +8,7 @@ class Map extends CI_Controller {
 
 		$data = array();
 
-		$data["form_action"] = form_open(base_url('map/search'), array("method" => 'get'));
+		$data["form_action"] = form_open(base_url('map/search'), array("method" => 'get', "id"=>"mapsearchfrm"));
 
 		$zoneData = $this->zone_model->dropdown();
 		$data["dropdown_zone"] = form_dropdown(
@@ -50,6 +50,17 @@ class Map extends CI_Controller {
 
 
 		$this->load->view('map', $data);
+	}
+
+	public function search(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+		}
+
+		$json = array();
+
+		$this->output->set_content_type("application/json");
+		$this->output->set_output(json_encode($json));
 	}
 }
 

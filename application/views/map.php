@@ -1,5 +1,7 @@
 <?php echo $this->view("layouts/header", array("map" => true)); ?>
-
+      <script type="text/javascript">
+            app.mapSearchURL = '<?php echo site_url("map/search");?>';
+      </script>
       <div class="row main">
 
       	<div class="col-md-3 search-box">
@@ -31,7 +33,7 @@
                               <?php echo $input_min_price; ?>
                         </div>
 
-                        <button class="btn btn-danger btn-block">بحث</button>
+                        <button id="mapsearchbtn" class="btn btn-danger btn-block" type="button">بحث</button>
                   <?php echo form_close(); ?>
 
       	</div> <!-- /.search-box -->
@@ -41,10 +43,12 @@
       	</div> <!-- /.map-holder -->
 
       </diyv> <!-- /.main -->
+      <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.parseparams.js');?>"></script>
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
       <script type="text/javascript">
       	$(function(){
       		app.mapInitialize("map-canvas");
+                  app.initializeMapSearch("#mapsearchfrm");
       	})
       </script>
 
