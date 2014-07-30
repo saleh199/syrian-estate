@@ -4,35 +4,31 @@
 
       	<div class="col-md-3 search-box">
       		<h4>بحث عن عقار</h4>
-      		<div class="form-group">
-      			<label class="control-label">نوع العقار</label>
-      			<select class="form-control">
-      				<option>نوع العقار</option>
-      			</select>
-      		</div>
+                  
+                  <?php echo $form_action ;?>
+      		    <div class="form-group">
+      			   <label class="control-label">نوع العقار</label>
+      			   <?php echo $dropdown_property_type; ?>
+      		    </div>
 
-      		<div class="form-group">
-      			<label class="control-label">المنطقة</label>
-      			<select class="form-control">
-      				<option>المنطقة</option>
-      			</select>
-      		</div>
+      		    <div class="form-group">
+      			   <label class="control-label">المنطقة</label>
+      			   <?php echo $dropdown_property_status; ?>
+      		    </div>
 
-      		<div class="form-group">
-      			<label class="control-label">أعلى سعر</label>
-      			<select class="form-control">
-      				<option>أعلى سعر</option>
-      			</select>
-      		</div>
+      		    <div class="form-group">
+      			   <label class="control-label">أعلى سعر</label>
+      			   <?php echo $input_max_price; ?>
+      		    </div>
 
-      		<div class="form-group">
-      			<label class="control-label">اقل سعر</label>
-      			<select class="form-control">
-      				<option>أقل سعر</option>
-      			</select>
-      		</div>
+      		    <div class="form-group">
+      			   <label class="control-label">اقل سعر</label>
+      			   <?php echo $input_min_price; ?>
+      		    </div>
 
-      		<button class="btn btn-danger btn-block">بحث</button>
+      		    <button class="btn btn-danger btn-block">بحث</button>
+                  <?php echo form_close(); ?>
+                  
       	</div> <!-- /.search-box -->
 
       	<div class="col-md-9 map-holder">
