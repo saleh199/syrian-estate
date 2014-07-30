@@ -28,6 +28,7 @@
 
     <script type="text/javascript">
       app.config = {
+        csrf_token_name : '<?php echo $this->config->item("csrf_token_name"); ?>',
         sitePath : '<?php echo site_url(); ?>',
         assetsPath : '<?php echo base_url("assets"); ?>/'
       };

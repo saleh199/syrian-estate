@@ -63,10 +63,10 @@ class Properties extends CI_Controller {
 		$this->load->model('property_type_model', 'property_type');
 		$this->load->model('zone_model', 'zone');
 
-		$property_info = $this->property_model->userPropertyInfo(1, $property_id);
+		$data['property_info'] = $property_info = $this->property_model->userPropertyInfo(1, $property_id);
 
 
-		$data["form_action"] = form_open_multipart('user/properties/edit/'.$property_id, array("id" => "propertyfrm", "class" => 'form-horizontal'), array("property_id" => $property_id));
+		$data["form_action"] = form_open('user/properties/edit/'.$property_id, array("id" => "propertyfrm", "class" => 'form-horizontal'), array("property_id" => $property_id));
 
 		if(isset($postData["title"])){
 			$property_title = $postData["title"];
@@ -232,7 +232,156 @@ class Properties extends CI_Controller {
 
 		$data["hidden_map_zoom"] = form_hidden("map_zoom", $map_zoom);
 
+
+		$data["form_image_action"] = form_open_multipart(
+			'user/properties/upload/',
+			array("id" => "propertyimagefrm"),
+			array("property_id" => $property_id)
+		);
+
+		$data["input_image"] = form_input(array(
+			"type" => "file",
+			"name" => "image_file",
+			"id" => "image_file",
+			"class" => "form-control"
+		));
+
 		$this->load->view('user/properties/form', $data);
+	}
+
+	public function upload(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+		}
+
+		$this->load->library("form_validation");
+		$this->load->model('property_image_model', 'property_image');
+		$this->load->model('property_model');
+
+		$postData = array();
+
+		if($this->input->post()){
+			$postData = $this->input->post(NULL, TRUE);
+		}
+
+		$property_id = $postData['property_id'];
+
+		$property_info = $this->property_model->userPropertyInfo(1, $property_id);
+
+		if(!$property_info){
+			show_404();
+		}
+
+		$json = array();
+
+		$this->form_validation->set_rules('image_file', 'صورة العقار', 'callback__upload_image');
+
+		if ($this->form_validation->run() == TRUE){
+			$uploadData = $this->upload->data();
+			$data = array(
+				"filename"	=>	$uploadData['file_name'],
+				"orig_name"	=>	$uploadData['orig_name'],
+				"property_id" => $property_id,
+			);
+
+			if($inserted = $this->property_image->insert($data)){
+				$upload_path = $this->config->item("upload_path", 'upload');
+
+				$property_directory = $upload_path . $property_id . '/';
+				//mkdir($property_directory, 0777, TRUE);
+
+				if(@copy($uploadData["full_path"], $property_directory . $uploadData['file_name'])){
+					unlink($uploadData["full_path"]);
+				}
+
+				$json["result"] = 'success';
+				$json["inserted"] = $inserted;
+				$json["image_src"] = base_url('assets/upload/'.$property_id . '/'.$uploadData['file_name']);
+			}else{
+				$json["result"] = 'fail';
+				$json["errors"] = array('alert' => 'حدث خطأ أثناء عملية الإضافة');
+			}
+			
+		}else{
+			$json["result"] = 'fail';
+			$json["errors"] = $this->form_validation->error_array();
+		}
+
+		$this->output->set_content_type("application/json");
+		$this->output->set_output(json_encode($json));
+	}
+
+	public function delete_image(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+		}
+
+		$this->load->model('property_model');
+		$this->load->model('property_image_model', 'property_image');
+
+		$postData = array();
+
+		if($this->input->post()){
+			$postData = $this->input->post(NULL, TRUE);
+		}
+
+		$property_id = $postData['property_id'];
+
+		$property_info = $this->property_model->userPropertyInfo(1, $property_id);
+
+		if(!$property_info){
+			show_404();
+		}
+
+		$json = array();
+		$image_info = $this->property_image->get_by(array(
+			"property_id" => $property_id,
+			"property_image_id" => intval($this->input->post("property_image_id"))));
+
+		if($image_info){
+			if($this->property_image->delete_by(array(
+				"property_id" => $property_id,
+				"property_image_id" => intval($this->input->post("property_image_id"))
+			))){
+				$this->load->config("upload", TRUE);
+
+				$upload_path = $this->config->item('upload_path', 'upload');
+
+				$file_path = $upload_path . $property_id . '/' . $image_info->filename;
+
+				if(file_exists($file_path)){
+					unlink($file_path);
+				}
+
+				$json['result'] = 'success';
+			}else{
+				$json['result'] = 'fail';
+			}
+		}else{
+			$json['result'] = 'fail';
+		}
+
+		$this->output->set_content_type("application/json");
+		$this->output->set_output(json_encode($json));
+	}
+
+	public function _upload_image(){
+		$this->load->config("upload", TRUE);
+		$this->load->library('upload');
+
+		$config = $this->config->item('upload');
+
+		$config['upload_path']	.= 'tmp/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+
+		$this->upload->initialize($config);
+
+		if(!$this->upload->do_upload('image_file')){
+			$this->form_validation->set_message('_upload_image', $this->upload->error_msg[0]);
+			return FALSE;
+		}else{
+			return TRUE;
+		}
 	}
 }
 

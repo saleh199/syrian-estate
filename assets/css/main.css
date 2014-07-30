@@ -35,6 +35,12 @@ a:hover, a:focus{
 	color: #A27EA7;
 }
 
+.v-center {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
 .btn-link, .btn-link:hover, .btn-link:focus {
 	color: #82488A;
 }
@@ -53,6 +59,11 @@ a:hover, a:focus{
 .text-danger,.text-danger, .text-danger:hover {
 	color: #8D234A;
 }
+
+a.text-danger:hover{
+	color: #8D234A;	
+}
+
 .form-control:focus{
 	border-color: #A27EA7;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px #D2C7D3;
@@ -82,6 +93,11 @@ a:hover, a:focus{
 	border-color: #40236E;
 }
 
+.btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active{
+	background-color: #685090;
+	border-color: #40236E;
+}
+
 .btn-primary {
 	background-color: rgb(97, 28, 106);
 	border-color: rgb(66, 1, 76);
@@ -90,6 +106,11 @@ a:hover, a:focus{
 .btn-primary:hover, 
 .btn-primary:focus, 
 .btn-group.open .dropdown-toggle.btn-primary {
+	background-color: rgb(130, 72, 138);
+	border-color: rgb(97, 28, 106);
+}
+
+.btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active{
 	background-color: rgb(130, 72, 138);
 	border-color: rgb(97, 28, 106);
 }
@@ -269,4 +290,18 @@ a:hover, a:focus{
 
 .property-info .tab-pane{
 	margin-top: 10px;
+}
+
+.property-info .images-list .thumbnail{
+	position: relative;
+}
+.property-info .images-list .thumbnail > img{
+	height: 147px;
+}
+.property-info .images-list .thumbnail .tools-btn{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 17px;
+	cursor: pointer;
 }
