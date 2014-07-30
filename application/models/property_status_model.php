@@ -25,6 +25,7 @@ class property_status_model extends MY_Model
 	public function dropdown(){
 		$this->_database->order_by('property_status_name' , 'ASC');
 		$list = parent::dropdown($this->primary_key, "property_status_name");
+		$list = array('' => 'اختر حالة العقار') + $list;
 
 		return $list;
 	}

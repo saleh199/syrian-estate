@@ -25,6 +25,7 @@ class property_type_model extends MY_Model
 	public function dropdown(){
 		$this->_database->order_by('property_type_name' , 'ASC');
 		$list = parent::dropdown($this->primary_key, "property_type_name");
+		$list = array('' => 'اختر نوع العقار') + $list;
 
 		return $list;
 	}

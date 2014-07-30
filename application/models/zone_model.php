@@ -23,6 +23,7 @@ class zone_model extends MY_Model{
 	public function dropdown(){
 		$this->_database->order_by('zone_name' , 'ASC');
 		$list = parent::dropdown($this->primary_key, "zone_name");
+		$list = array('' => 'اختر المنطقة') + $list;
 
 		return $list;
 	}
