@@ -10,6 +10,14 @@ class Map extends CI_Controller {
 
 		$data["form_action"] = form_open(base_url('map/search'), array("method" => 'get'));
 
+		$zoneData = $this->zone_model->dropdown();
+		$data["dropdown_zone"] = form_dropdown(
+			"zone_id",
+			$zoneData,
+			'',
+			'id="zone_id" class="form-control"'
+		);
+
 		$propertyTypeData = $this->property_type_model->dropdown();
 		$data["dropdown_property_type"] = form_dropdown(
 			"property_type_id",
