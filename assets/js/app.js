@@ -76,7 +76,7 @@ $(function(){
 
 	app.addMarker = function(markerOpt, _dragend_callback){
 		console.log(markerOpt);
-		marker = new google.maps.Marker(markerOpt);
+		var marker = new google.maps.Marker(markerOpt);
 		app.markers.push(marker);
 
 		if(typeof(_dragend_callback) == "function"){
@@ -84,6 +84,13 @@ $(function(){
 				_dragend_callback.call(window, marker.getPosition());
 			});
 		}
+
+		google.maps.event.addListener(app.map, "click", function(event) {
+			lat = event.latLng.lat();
+			lng = event.latLng.lng();
+
+			marker.setPosition(event.latLng);
+		});
 	}
 
 	app.initializeAddProperty = function(){
