@@ -74,8 +74,7 @@ $(function(){
 	}
 	/* end initialize search map */
 
-	app.addMarker = function(markerOpt, _dragend_callback){
-		console.log(markerOpt);
+	app.addMarker = function(markerOpt, _dragend_callback, _infoWindowContent){
 		var marker = new google.maps.Marker(markerOpt);
 		app.markers.push(marker);
 
@@ -83,14 +82,26 @@ $(function(){
 			google.maps.event.addListener(marker, 'dragend', function(){
 				_dragend_callback.call(window, marker.getPosition());
 			});
+
+			google.maps.event.addListener(app.map, "click", function(event) {
+				lat = event.latLng.lat();
+				lng = event.latLng.lng();
+
+				marker.setPosition(event.latLng);
+				_dragend_callback.call(window, marker.getPosition());
+			});
 		}
 
-		google.maps.event.addListener(app.map, "click", function(event) {
-			lat = event.latLng.lat();
-			lng = event.latLng.lng();
 
-			marker.setPosition(event.latLng);
-		});
+		if(_infoWindowContent != ''){
+			var infowindow = new google.maps.InfoWindow({
+				content: _infoWindowContent
+			});
+
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(app.map,marker);
+			});
+		}
 	}
 
 	app.initializeAddProperty = function(){
@@ -295,6 +306,16 @@ $(function(){
 			app.markers = [];
 		}
 
+		function setZoom(map, markers) {
+			var boundbox = new google.maps.LatLngBounds();
+			for ( var i = 0; i < app.markers.length; i++ )
+			{
+				boundbox.extend(app.markers[i].getPosition());
+			}
+			map.setCenter(boundbox.getCenter());
+			map.fitBounds(boundbox);
+		}
+
 		var $form = $(_formId);
 
 		$(window).on("hashchange", function(){
@@ -313,14 +334,18 @@ $(function(){
 						json = xhr.responseJSON;
 
 						$.each(json.results, function(index, item){
+
 							if(item.map_lat && item.map_lng){
+								infoWindowContent = '<div class="media" style="width:300px;"><a class="pull-right"><img class="media-object" src="'+item.image+'" width="90px"></a><div class="media-body"><h4 class="media-heading">'+item.title+'</h4>السعر: '+item.price+'<br>'+item.description+'<br><a href="#">تفاصيل الإعلان</a></div></div>';
 								app.addMarker({
 									position : new google.maps.LatLng(item.map_lat, item.map_lng),
 									map: app.map,
 									title : item.title
-								});
+								}, '', infoWindowContent);
 							}
 						});
+
+						setZoom(app.map, app.markers);
 					}
 				});
 			}
