@@ -1,4 +1,5 @@
 var app = {};
+app.markers = [];
 
 $(function(){
 
@@ -76,7 +77,7 @@ $(function(){
 	app.addMarker = function(markerOpt, _dragend_callback){
 		console.log(markerOpt);
 		marker = new google.maps.Marker(markerOpt);
-		app.marker = marker;
+		app.markers.push(marker);
 
 		if(typeof(_dragend_callback) == "function"){
 			google.maps.event.addListener(marker, 'dragend', function(){
@@ -272,22 +273,47 @@ $(function(){
 
 
 	app.initializeMapSearch = function(_formId){
+		function setAllMap(map) {
+			for (var i = 0; i < app.markers.length; i++) {
+				app.markers[i].setMap(map);
+			}
+		}
+
+		function clearMarkers() {
+			setAllMap(null);
+		}
+
+		function deleteMarkers() {
+			clearMarkers();
+			app.markers = [];
+		}
+
 		var $form = $(_formId);
 
 		$(window).on("hashchange", function(){
 			if(location.hash.length > 0){
 				params = $.parseParams(location.hash);
-				console.log(params);
+				//console.log(params);
 
 				$.ajax({
 					url : app.mapSearchURL,
 					dataType : 'json',
 					type : 'get',
 					success : function(){
-	
+						clearMarkers();
 					},
 					complete : function(xhr){
-						console.log(xhr);
+						json = xhr.responseJSON;
+
+						$.each(json.results, function(index, item){
+							if(item.map_lat && item.map_lng){
+								app.addMarker({
+									position : new google.maps.LatLng(item.map_lat, item.map_lng),
+									map: app.map,
+									title : item.title
+								});
+							}
+						});
 					}
 				});
 			}

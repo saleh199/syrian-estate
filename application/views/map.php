@@ -40,7 +40,7 @@
 
       	<div class="col-md-9 map-holder">
       		<div id="map-canvas"></div>
-                  <div class="search-loader">جاري البحث</div>
+                  <div class="search-loader hidden">جاري البحث</div>
       	</div> <!-- /.map-holder -->
 
       </diyv> <!-- /.main -->

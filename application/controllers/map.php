@@ -54,10 +54,37 @@ class Map extends CI_Controller {
 
 	public function search(){
 		if(!$this->input->is_ajax_request()){
-			show_404();
+			//show_404();
 		}
 
+		$this->load->model('property_model');
+
 		$json = array();
+		$filter = array();
+
+		$inputData = $this->input->get(NULL, TRUE);
+
+		if($inputData["property_type_id"]){
+			$filter["property_type_id"] = intval($inputData["property_type_id"]);
+		}
+
+		if($inputData["property_status_id"]){
+			$filter["property_status_id"] = intval($inputData["property_status_id"]);
+		}
+
+		if($inputData["zone_id"]){
+			$filter["zone_id"] = intval($inputData["zone_id"]);
+		}
+
+		if($inputData["min_price"]){
+			$filter["price >= "] = intval($inputData["min_price"]);
+		}
+
+		if($inputData["max_price"]){
+			$filter["price <= "] = intval($inputData["max_price"]);
+		}
+
+		$json["results"] = $this->property_model->with('images')->get_many_by($filter);
 
 		$this->output->set_content_type("application/json");
 		$this->output->set_output(json_encode($json));
