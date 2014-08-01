@@ -32,6 +32,9 @@
         sitePath : '<?php echo site_url(); ?>',
         assetsPath : '<?php echo base_url("assets"); ?>/'
       };
+      <?php if ($this->ion_auth->logged_in()){ ?>
+        app.userProperties = '<?php echo site_url("user/properties");?>';
+      <?php } ?>
     </script>
 
   </head>

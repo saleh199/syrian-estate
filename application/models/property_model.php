@@ -99,9 +99,11 @@ class property_model extends MY_Model
 
 	public function userPropertyInfo($user_id, $property_id){
 		if(!empty($user_id) && $user_id != NULL){
-			$result = $this->getPropertyList(array("user_id" => intval($user_id), "property_id" => intval($property_id)));
+			$results = $this->getPropertyList(array("user_id" => intval($user_id), "property_id" => intval($property_id)));
 
-			return $result;
+			if($results){
+				return $results[0];
+			}
 		}
 
 		return array();

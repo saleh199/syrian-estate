@@ -199,6 +199,7 @@ $(function(){
 						})
 					}else if(json.result == 'success'){
 						app.Modal.modal('hide');
+						location.href = app.userProperties;
 					}
 				}
 			});

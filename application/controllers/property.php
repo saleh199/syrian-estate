@@ -85,7 +85,8 @@ class Property extends CI_Controller {
 			$data = $this->input->post(NULL, TRUE);
 			unset($data[$this->config->item("csrf_token_name")]);
 
-			$data["user_id"] = 1;
+			$data["user_id"] = $this->session->userdata('user_id');
+			
 			if($inserted = $this->property_model->insert($data)) {
 				$data = array(
 					"filename"	=>	$uploadData['file_name'],

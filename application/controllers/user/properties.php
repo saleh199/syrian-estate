@@ -2,11 +2,25 @@
 
 class Properties extends CI_Controller {
 
+	public function __construct(){
+		parent::__construct();
+
+		if(!$this->ion_auth->logged_in()){
+			redirect('login', 'refresh');
+		}
+
+		if($this->ion_auth->is_admin()){
+			//redirect('admin/properties');
+		}
+	}
+
 	public function index()
 	{
+		$user_id = $this->session->userdata('user_id');
+
 		$this->load->model('property_model');
 
-		$results = $this->property_model->userPropertyList(1);
+		$results = $this->property_model->userPropertyList($user_id);
 
 		foreach ($results as $index => $item) {
 			$results[$index]->href_edit = site_url('user/properties/edit/'.$item->property_id);
@@ -27,8 +41,18 @@ class Properties extends CI_Controller {
 			show_404();
 		}
 
+		$user_id = $this->session->userdata('user_id');
+
+		$property_id = $params['property_id'];
+
 		$this->load->model('property_model');
 		$this->load->library('form_validation');
+
+		$data['property_info'] = $property_info = $this->property_model->userPropertyInfo($user_id, $property_id);
+
+		if(!$property_info){
+			show_404();
+		}
 
 		$postData = array();
 
@@ -47,7 +71,6 @@ class Properties extends CI_Controller {
 			$postData = $this->input->post(NULL, TRUE);
 		}
 
-		$property_id = $params['property_id'];
 
 		if ($this->form_validation->run() == TRUE){
 			unset($postData['csrf_tkn']);
@@ -62,8 +85,6 @@ class Properties extends CI_Controller {
 		$this->load->model('property_status_model', 'property_status');
 		$this->load->model('property_type_model', 'property_type');
 		$this->load->model('zone_model', 'zone');
-
-		$data['property_info'] = $property_info = $this->property_model->userPropertyInfo(1, $property_id);
 
 
 		$data["form_action"] = form_open('user/properties/edit/'.$property_id, array("id" => "propertyfrm", "class" => 'form-horizontal'), array("property_id" => $property_id));
@@ -254,6 +275,8 @@ class Properties extends CI_Controller {
 			show_404();
 		}
 
+		$user_id = $this->session->userdata('user_id');
+
 		$this->load->library("form_validation");
 		$this->load->model('property_image_model', 'property_image');
 		$this->load->model('property_model');
@@ -266,7 +289,7 @@ class Properties extends CI_Controller {
 
 		$property_id = $postData['property_id'];
 
-		$property_info = $this->property_model->userPropertyInfo(1, $property_id);
+		$property_info = $this->property_model->userPropertyInfo($user_id, $property_id);
 
 		if(!$property_info){
 			show_404();
@@ -316,6 +339,8 @@ class Properties extends CI_Controller {
 			show_404();
 		}
 
+		$user_id = $this->session->userdata('user_id');
+
 		$this->load->model('property_model');
 		$this->load->model('property_image_model', 'property_image');
 
@@ -327,7 +352,7 @@ class Properties extends CI_Controller {
 
 		$property_id = $postData['property_id'];
 
-		$property_info = $this->property_model->userPropertyInfo(1, $property_id);
+		$property_info = $this->property_model->userPropertyInfo($user_id, $property_id);
 
 		if(!$property_info){
 			show_404();

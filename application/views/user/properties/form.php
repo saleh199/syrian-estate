@@ -169,6 +169,10 @@
                         center.lat = $("#propertyfrm input[name=map_lat]").val();
                         center.lng = $("#propertyfrm input[name=map_lng]").val();
                         center.zoom = parseInt($("#propertyfrm input[name=map_zoom]").val());
+                  }else{
+                        center.lat = 32.71252485795853;
+                        center.lng = 36.56646966934204;
+                        center.zoom = 15;
                   }
 
                   app.mapInitialize("map-canvas", center, function(zoom){
