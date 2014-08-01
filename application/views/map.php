@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="form-group">
-                              <label class="control-label">المنطقة</label>
+                              <label class="control-label">حالة العقار</label>
                               <?php echo $dropdown_property_status; ?>
                         </div>
 

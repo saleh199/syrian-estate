@@ -322,14 +322,15 @@ $(function(){
 		$(window).on("hashchange", function(){
 			if(location.hash.length > 0){
 				params = $.parseParams(location.hash);
-				//console.log(params);
 
 				$.ajax({
 					url : app.mapSearchURL,
+					data : params,
 					dataType : 'json',
 					type : 'get',
 					success : function(){
 						clearMarkers();
+						console.log('clear markers');
 					},
 					complete : function(xhr){
 						json = xhr.responseJSON;
@@ -346,7 +347,9 @@ $(function(){
 							}
 						});
 
-						setZoom(app.map, app.markers);
+						if(json.results.length > 0){
+							setZoom(app.map, app.markers);
+						}
 					}
 				});
 			}

@@ -64,23 +64,23 @@ class Map extends CI_Controller {
 
 		$inputData = $this->input->get(NULL, TRUE);
 
-		if($inputData["property_type_id"]){
+		if(isset($inputData["property_type_id"]) && intval($inputData["property_type_id"]) > 0){
 			$filter["property_type_id"] = intval($inputData["property_type_id"]);
 		}
 
-		if($inputData["property_status_id"]){
+		if(isset($inputData["property_status_id"]) && intval($inputData["property_status_id"])){
 			$filter["property_status_id"] = intval($inputData["property_status_id"]);
 		}
 
-		if($inputData["zone_id"]){
+		if(isset($inputData["zone_id"]) && intval($inputData["zone_id"])){
 			$filter["zone_id"] = intval($inputData["zone_id"]);
 		}
 
-		if($inputData["min_price"]){
+		if(isset($inputData["min_price"]) && intval($inputData["min_price"])){
 			$filter["price >= "] = intval($inputData["min_price"]);
 		}
 
-		if($inputData["max_price"]){
+		if(isset($inputData["max_price"]) && intval($inputData["max_price"])){
 			$filter["price <= "] = intval($inputData["max_price"]);
 		}
 

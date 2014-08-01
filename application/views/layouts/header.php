@@ -63,8 +63,8 @@
       	<div class="col-md-12">
       		<ul class="nav nav-pills">
       			<li><a href="<?php echo site_url(); ?>">الصفحة الرئيسية</a></li>
-      			<li><a href="#">عقارات للإيجار</a></li>
-      			<li><a href="#">عقارات للبيع</a></li>
+      			<li><a href="<?php echo site_url('map').'#property_status_id=4';?>">عقارات للإيجار</a></li>
+      			<li><a href="<?php echo site_url('map').'#property_status_id=3';?>">عقارات للبيع</a></li>
       			<li class="pull-left"><a href="#" id="menuAddHandler">أضف عقارك</a></li>
       		</ul>
       	</div>

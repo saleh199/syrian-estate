@@ -7,7 +7,7 @@
       			<div class="container">
       				<h1>عقارات سوريا</h1>
       				<p>بوابتك الأولى للبحث عن العقار</p>
-      				<p><a class="btn btn-primary" role="button">تصفح الخريطة</a> <a class="btn btn-primary" role="button">بحث بالقائمة</a></p>
+      				<p><a class="btn btn-primary" role="button" href="<?php echo site_url('map');?>">تصفح الخريطة</a> <a class="btn btn-primary" role="button">بحث بالقائمة</a></p>
       			</div>
       		</div>
       	</div> <!-- /.site-desc -->
