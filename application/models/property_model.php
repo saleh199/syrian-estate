@@ -53,9 +53,20 @@ class property_model extends MY_Model
 		return $data;
 	}
 
+	public function getPropertyList($filter){
+		$results = $this->with('images')
+						->with('property_status')
+						->with('property_type')
+					   	->with('zone')
+					   	->order_by('date_added', 'DESC')
+					   	->get_many_by($filter);
+
+		return $results;
+	}
+
 	public function userPropertyList($user_id){
 		if(!empty($user_id) && $user_id != NULL){
-			$result = $this->with('images')->with('property_status')->with('property_type')->with('zone')->order_by('date_added', 'DESC')->get_many_by(array("user_id" => intval($user_id)));
+			$result = $this->getPropertyList(array("user_id" => intval($user_id)));
 
 			return $result;
 		}
@@ -65,7 +76,7 @@ class property_model extends MY_Model
 
 	public function userPropertyInfo($user_id, $property_id){
 		if(!empty($user_id) && $user_id != NULL){
-			$result = $this->with('images')->with('property_status')->with('property_type')->with('zone')->get_by(array("user_id" => intval($user_id), "property_id" => intval($property_id)));
+			$result = $this->getPropertyList(array("user_id" => intval($user_id), "property_id" => intval($property_id)));
 
 			return $result;
 		}
