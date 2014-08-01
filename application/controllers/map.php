@@ -84,6 +84,8 @@ class Map extends CI_Controller {
 			$filter["price <= "] = intval($inputData["max_price"]);
 		}
 
+		$filter["status"] = 1;
+
 		$json["results"] = $this->property_model->with('images')->get_many_by($filter);
 
 		$this->output->set_content_type("application/json");
