@@ -96,5 +96,8 @@
 
       	<hr>
   	</div>
+    <script type="text/javascript">
+    $('input[name=phone]').tooltip();
+    </script>
   </body>
   </html>

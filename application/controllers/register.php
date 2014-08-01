@@ -67,6 +67,8 @@ class Register extends CI_Controller {
 				"name" => "phone",
 				"class" => "form-control",
 				"placeholder" => "رقم الموبايل",
+				"data-placement" => "left",
+				"title" => "يجب إدخال رقم موبايل صحيح لكي يتم التواصل عليه",
 				"value" => $this->form_validation->set_value('phone')
 			));
 
