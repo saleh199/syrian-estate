@@ -46,8 +46,9 @@
           <a href="<?php echo site_url('login');?>" class="btn btn-link">دخول</a> |
           <a href="<?php echo site_url('register');?>" class="btn btn-link">تسجيل جديد</a>
           <?php }else{ ?>
+          <a href="<?php echo site_url('user/profile/edit');?>" class="btn btn-link"><img src="<?php echo base_url('assets/image/avatar.png');?>" width="17px"> <?php echo $this->session->userdata('username');?></a> |
           <a href="<?php echo site_url('user/properties');?>" class="btn btn-link">عقاراتي</a> |
-          <a href="<?php echo site_url('login/logout');?>" class="btn btn-danger btn-sm">تسجيل الخروج</a>
+          <a href="<?php echo site_url('user/profile/logout');?>" class="btn btn-danger btn-sm">تسجيل الخروج</a>
           <?php } ?>
         </div>
       </div>

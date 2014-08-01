@@ -50,13 +50,6 @@ class Login extends CI_Controller {
 
 		$this->load->view('login', $data);
 	}
-
-	function logout()
-	{
-		$logout = $this->ion_auth->logout();
-
-		redirect('/', 'refresh');
-	}
 }
 
 /* End of file login.php */
