@@ -71,6 +71,62 @@ class Profile extends CI_Controller {
 		$this->load->view('user/password', $data);
 	}
 
+	public function edit(){
+		$id = $this->session->userdata('user_id');
+		$user = $this->ion_auth->user($id)->row();
+		$groups=$this->ion_auth->groups()->result_array();
+		$currentGroups = $this->ion_auth->get_users_groups($id)->result();
+
+		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required|xss_clean');
+		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required|xss_clean');
+		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'required|xss_clean');
+
+		$data = array(
+			'first_name' => $this->input->post('first_name'),
+			'last_name'  => $this->input->post('last_name'),
+			'phone'      => $this->input->post('phone'),
+		);
+
+		if ($this->form_validation->run() === TRUE) {
+			$this->ion_auth->update($user->id, $data);
+
+			$this->session->set_flashdata('message', "تم تعديل معلومات الحساب");
+
+			redirect('user/profile/edit', 'refresh');
+		}
+
+		$data['errors'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+
+		$data["form_action"] = form_open('user/profile/edit', array("id" => "profilefrm", "class" => 'form-horizontal'));
+
+		$data['input_first_name'] = form_input(array(
+			'name'  => 'first_name',
+			'id'    => 'first_name',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('first_name', $user->first_name),
+			'class' => "form-control",
+			'placeholder' => 'الاسم الاول'
+		));
+		$data['input_last_name'] = form_input(array(
+			'name'  => 'last_name',
+			'id'    => 'last_name',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('last_name', $user->last_name),
+			'class' => "form-control",
+			'placeholder' => 'الكنية'
+		));
+		$data['input_phone'] = form_input(array(
+			'name'  => 'phone',
+			'id'    => 'phone',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('phone', $user->phone),
+			'class' => "form-control",
+			'placeholder' => 'رقم الموبايل'
+		));
+
+		$this->load->view('user/edit', $data);
+	}
+
 	function logout()
 	{
 		$logout = $this->ion_auth->logout();
