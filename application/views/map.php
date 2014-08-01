@@ -1,6 +1,7 @@
 <?php echo $this->view("layouts/header", array("map" => true)); ?>
       <script type="text/javascript">
             app.mapSearchURL = '<?php echo site_url("map/search");?>';
+            app.propertyView = '<?php echo site_url("property/view");?>';
       </script>
       <div class="row main">
 

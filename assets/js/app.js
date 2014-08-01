@@ -336,7 +336,7 @@ $(function(){
 						$.each(json.results, function(index, item){
 
 							if(item.map_lat && item.map_lng){
-								infoWindowContent = '<div class="media" style="width:300px;"><a class="pull-right"><img class="media-object" src="'+item.image+'" width="90px"></a><div class="media-body"><h4 class="media-heading">'+item.title+'</h4>السعر: '+item.price+'<br>'+item.description+'<br><a href="#">تفاصيل الإعلان</a></div></div>';
+								infoWindowContent = '<div class="media" style="width:300px;"><a class="pull-right"><img class="media-object" src="'+item.image+'" width="90px"></a><div class="media-body"><h4 class="media-heading">'+item.title+'</h4>السعر: '+item.price+'<br>'+item.description+'<br><a href="'+app.propertyView+'/'+item.property_id+'">تفاصيل الإعلان</a></div></div>';
 								app.addMarker({
 									position : new google.maps.LatLng(item.map_lat, item.map_lng),
 									map: app.map,
