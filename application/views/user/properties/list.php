@@ -12,6 +12,14 @@
 
                   <div class="row property-list">
                         <div class="col-md-12">
+                              <ul class="list-unstyled">
+                                    <li><span title="العقار محدد كعقار مميز" class="glyphicon glyphicon-star featured"></span> العقار محدد كعقار مميز</li>
+                                    <li><span class="glyphicon glyphicon-eye-open active" title="العقار معروض على الموقع"></span> العقار معروض على الموقع</li>
+                                    <li><span class="glyphicon glyphicon-eye-close unactive" title="يحتاج العقار إلى استكمال بيانات أو موافقة من قبل المدير"></span> يحتاج العقار إلى استكمال بيانات أو موافقة من قبل المدير</li>
+                              </ul>
+                              <hr>
+                        </div>
+                        <div class="col-md-12">
                         <?php foreach($results as $item) { ?>
                               <div class="media property-item">
                                     <a href="<?php echo $item->image ;?>" class="pull-right">
@@ -26,7 +34,17 @@
 
                                                 <button class="btn btn-danger btn-sm btn-delete"><span class="glyphicon glyphicon-remove"></span> حذف</button>
 
-                                                <span class="date-added" dir="ltr"><?php echo $item->date_added_human;?></span>
+                                                <span class="date-added" dir="ltr">
+                                                      <?php if($item->featured){ ?>
+                                                      <span title="العقار محدد كعقار مميز" class="glyphicon glyphicon-star featured"></span>
+                                                      <?php } ?>
+                                                      <?php if($item->status) { ?>
+                                                      <span class="glyphicon glyphicon-eye-open active" title="العقار معروض على الموقع"></span>
+                                                      <?php }else{ ?>
+                                                      <span class="glyphicon glyphicon-eye-close unactive" title="يحتاج العقار إلى استكمال بيانات أو موافقة من قبل المدير"></span>
+                                                      <?php } ?>
+                                                      <?php echo $item->date_added_human;?>
+                                                </span>
                                           
                                     </div>
                               </div>
@@ -35,5 +53,4 @@
                   </div>
             </div>
       </div> <!-- /.main -->
-
     <?php echo $this->view("layouts/footer"); ?>

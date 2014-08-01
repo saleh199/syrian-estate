@@ -277,6 +277,22 @@ a.text-danger:hover{
 	border-bottom-right-radius: 8px;
 }
 
+.property-list .featured,
+.property-list .active,
+.property-list .unactive {
+	font-size: 14px;
+	cursor: pointer;
+}
+.property-list .featured{
+	color: #E8F54F;
+}
+.property-list .active{
+	color: #0A7F32;
+}
+.property-list .unactive{
+	color: #AE2F0E;
+}
+
 .property-info .tab-pane{
 	margin-top: 10px;
 }
