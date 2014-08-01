@@ -4,6 +4,12 @@ class Property extends CI_Controller {
 
 	public function addModal()
 	{
+		if (!$this->ion_auth->logged_in()){
+			$out = $this->load->view('modal/login', array(), TRUE);
+			print $out;
+			exit;
+		}
+
 		$this->load->model('property_status_model', 'property_status');
 		$this->load->model('property_type_model', 'property_type');
 		$this->load->model('zone_model', 'zone');
@@ -63,6 +69,10 @@ class Property extends CI_Controller {
 	}
 
 	public function insert(){
+		if(!$this->ion_auth->logged_in()){
+			show_404();
+		}
+
 		if(!$this->input->is_ajax_request()){
 			show_404();
 		}
@@ -86,7 +96,7 @@ class Property extends CI_Controller {
 			unset($data[$this->config->item("csrf_token_name")]);
 
 			$data["user_id"] = $this->session->userdata('user_id');
-			
+
 			if($inserted = $this->property_model->insert($data)) {
 				$data = array(
 					"filename"	=>	$uploadData['file_name'],
