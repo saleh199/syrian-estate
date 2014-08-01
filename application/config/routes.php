@@ -45,6 +45,9 @@ $route['user/properties'] = 'user/properties';
 $route['user/properties/add'] = 'user/properties/add';
 $route['user/properties/edit/(:num)'] = 'user/properties/edit/property_id/$1';
 
+$route['property/view/(:num)'] = 'property/view/property_id/$1';
+$route['property/static_img/(:num)'] = 'property/google_static_map/property_id/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
