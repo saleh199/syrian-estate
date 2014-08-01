@@ -53,7 +53,6 @@ class Login extends CI_Controller {
 
 	function logout()
 	{
-		//log the user out
 		$logout = $this->ion_auth->logout();
 
 		redirect('/', 'refresh');

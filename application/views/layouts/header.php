@@ -39,8 +39,13 @@
     <div class="container site-wrapper">
       <div class="row user-top">
         <div class="col-md-12">
-          <a href="#" class="btn btn-link">دخول</a> |
-          <a href="#" class="btn btn-link">تسجيل جديد</a>
+          <?php if (!$this->ion_auth->logged_in()){ ?>
+          <a href="<?php echo site_url('login');?>" class="btn btn-link">دخول</a> |
+          <a href="<?php echo site_url('register');?>" class="btn btn-link">تسجيل جديد</a>
+          <?php }else{ ?>
+          <a href="<?php echo site_url('user/properties');?>" class="btn btn-link">عقاراتي</a> |
+          <a href="<?php echo site_url('login/logout');?>" class="btn btn-danger btn-sm">تسجيل الخروج</a>
+          <?php } ?>
         </div>
       </div>
       <header class="row">
