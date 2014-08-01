@@ -317,3 +317,23 @@ a.text-danger:hover{
 	font-size: 17px;
 	cursor: pointer;
 }
+
+.property-view .page-header h4{
+	color: #611C6A;
+}
+.property-view .price {
+	color: #640025;
+}
+.property-view .dl-horizontal dd{
+	margin-right: 140px;
+	margin-bottom: 10px;
+}
+.property-view .dl-horizontal dt{
+	width: 120px;
+}
+
+.property-view .image-viewer .thumb{
+	height: 100%;
+	padding: 0 7px;
+	margin-bottom: 9px;
+}

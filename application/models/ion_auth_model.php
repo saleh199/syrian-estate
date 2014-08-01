@@ -26,8 +26,11 @@
 *
 */
 
-class Ion_auth_model extends CI_Model
+class Ion_auth_model extends MY_Model
 {
+	public $_table = "users";
+	public $primary_key = "id";
+
 	/**
 	 * Holds an array of tables used
 	 *

@@ -45,6 +45,23 @@ class Property extends CI_Controller {
 		$this->load->view('property/modal/form', $data);
 	}
 
+	public function view(){
+		$params = $this->uri->ruri_to_assoc(3);
+		if(!isset($params['property_id'])){
+			show_404();
+		}
+
+		$data = array();
+
+		$this->load->model("property_model");
+
+		$property_id = intval($params['property_id']);
+
+		$data["property_info"] = $info = $this->property_model->getPropertyInfo($property_id);
+
+		$this->load->view('property/view', $data);
+	}
+
 	public function insert(){
 		if(!$this->input->is_ajax_request()){
 			show_404();
@@ -101,6 +118,39 @@ class Property extends CI_Controller {
 
 		$this->output->set_content_type("application/json");
 		$this->output->set_output(json_encode($json));
+	}
+
+	public function google_static_map(){
+		$params = $this->uri->ruri_to_assoc(3);
+		if(!isset($params['property_id'])){
+			show_404();
+		}
+
+		$this->load->model("property_model");
+
+		$property_id = intval($params['property_id']);
+
+		$info = $this->property_model->getPropertyInfo($property_id);
+
+		if($info){
+			$this->load->helper('file');
+			$this->load->config('upload', TRUE);
+			$image_path = $this->config->item('upload_path', 'upload') . $property_id . '/static_image.png';
+
+			if(file_exists($image_path)){
+				$this->output->set_content_type('image/png');
+				$content = read_file($image_path);
+				$this->output->set_output($content);
+			}else{
+				$google_static_url = 'http://maps.googleapis.com/maps/api/staticmap?markers=color:orange|label:S|'.$info->map_lat.','.$info->map_lng.'&zoom='.($info->map_zoom-1).'&size=200x200&scale=2&format=png32';
+				
+				$content = file_get_contents($google_static_url);
+				write_file($image_path, $content);
+
+				$this->output->set_content_type('image/png');
+				$this->output->set_output($content);
+			}
+		}
 	}
 
 	public function _upload_image(){

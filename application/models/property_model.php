@@ -19,7 +19,8 @@ class property_model extends MY_Model
 	public $belongs_to = array(
 		"property_type" => array("model" => "property_type_model", "primary_key" => "property_type_id"),
 		"property_status" => array("model" => "property_status_model", "primary_key" => "property_status_id"),
-		"zone" => array("model" => "zone_model", "primary_key" => "zone_id")
+		"zone" => array("model" => "zone_model", "primary_key" => "zone_id"),
+		"user" => array("model" => "ion_auth_model", "primary_key" => "user_id")
 	);
 
 	protected function timestampInsert($data){
@@ -49,6 +50,17 @@ class property_model extends MY_Model
 				$data->image = base_url('assets/image/not-available.jpg');
 			}
 		}
+		
+		$data->google_map_static_image = site_url('property/static_img/'.$data->property_id);
+
+		unset(
+			$data->user->password,
+			$data->user->salt, 
+			$data->user->activation_code, 
+			$data->user->forgotten_password_code, 
+			$data->user->forgotten_password_time, 
+			$data->user->remember_code
+		);
 
 		return $data;
 	}
@@ -58,10 +70,21 @@ class property_model extends MY_Model
 						->with('property_status')
 						->with('property_type')
 					   	->with('zone')
+					   	->with('user')
 					   	->order_by('date_added', 'DESC')
 					   	->get_many_by($filter);
 
 		return $results;
+	}
+
+	public function getPropertyInfo($property_id){
+		$results = $this->getPropertyList(array('status' => 1, 'property_id' => $property_id));
+
+		if($results){
+			return $results[0];
+		}
+
+		return array();
 	}
 
 	public function userPropertyList($user_id){
