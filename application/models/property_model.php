@@ -62,16 +62,18 @@ class property_model extends MY_Model
 			$data->user->remember_code
 		);
 
+		$data->property_view_href = site_url("property/view/" . $data->property_id);
+
 		return $data;
 	}
 
-	public function getPropertyList($filter){
+	public function getPropertyList($filter, $order = array('date_added' => 'DESC')){
 		$results = $this->with('images')
 						->with('property_status')
 						->with('property_type')
 					   	->with('zone')
 					   	->with('user')
-					   	->order_by('date_added', 'DESC')
+					   	->order_by($order)
 					   	->get_many_by($filter);
 
 		return $results;
@@ -104,6 +106,16 @@ class property_model extends MY_Model
 			if($results){
 				return $results[0];
 			}
+		}
+
+		return array();
+	}
+
+	public function getFeaturedProperties(){
+		$results = $this->getPropertyList(array("featured" => 1, "status" => 1), array('date_modified' => 'DESC'));
+
+		if($results){
+			return $results;
 		}
 
 		return array();

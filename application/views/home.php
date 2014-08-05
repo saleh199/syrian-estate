@@ -48,41 +48,16 @@
 			</div>
 
       		<div class="row">
+                        <?php foreach($featured as $item) { ?>
       			<div class="col-md-3">
-      				<div class="thumbnail">
-      					<img data-src="holder.js/210x210" alt="...">
+      				<a href="<?php echo $item->property_view_href;?>" class="thumbnail">
+      					<img src="<?php echo $item->image;?>" width="210px">
       					<div class="caption">
-      						<h3>عقار 1</h3>
+      						<h4><?php echo $item->title;?></h4>
       					</div>
-      				</div>
+      				</a>
       			</div>
-
-      			<div class="col-md-3">
-      				<div class="thumbnail">
-      					<img data-src="holder.js/210x210" alt="...">
-      					<div class="caption">
-      						<h3>عقار 1</h3>
-      					</div>
-      				</div>
-      			</div>
-
-      			<div class="col-md-3">
-      				<div class="thumbnail">
-      					<img data-src="holder.js/210x210" alt="...">
-      					<div class="caption">
-      						<h3>عقار 1</h3>
-      					</div>
-      				</div>
-      			</div>
-
-      			<div class="col-md-3">
-      				<div class="thumbnail">
-      					<img data-src="holder.js/210x210" alt="...">
-      					<div class="caption">
-      						<h3>عقار 1</h3>
-      					</div>
-      				</div>
-      			</div>
+                        <?php } ?>
       		</div>
       	</div> <!-- /.featured-properties -->
 
