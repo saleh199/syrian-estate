@@ -2,18 +2,23 @@
  <script type="text/javascript">
  var RecaptchaOptions = {
     theme : 'clean',
+    custom_translations : {
+      incorrect_try_again : 'رمز التحقق غير صحيح'
+    },
     lang : 'ar'
  };
  </script>
       <div class="row main">
             <div class="col-md-12">
                   <div class="page-header">
-                        <h3>أضف مشروعك العقاري</h3>
+                        <h3>طلب إضافة مشروعك العقاري</h3>
                   </div>
             </div>
             <div class="col-md-4 col-md-offset-3">
                   <?php echo $form_action;?>
-                  <div class="alert alert-danger"><?php echo $message; ?></div>
+                  <?php if($message) { ?>
+                        <div class="alert alert-danger"><?php echo $message; ?></div>
+                  <?php } ?>
                         <div class="form-group">
                               <label class="label-control">اسم المشروع</label>
                               <?php echo $input_project_name;?>
