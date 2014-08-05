@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
  * This is a PHP library that handles calling reCAPTCHA.
  *    - Documentation and latest version
@@ -42,7 +42,7 @@ class ReCaptchaResponse {
   var $error;
 }
 
-class reCaptcha {
+class recaptcha {
   /**
   * Encodes the given data into a query string format
   * @param $data - array of string elements to be encoded
@@ -104,7 +104,7 @@ class reCaptcha {
   function recaptcha_get_html ($pubkey, $error = null, $use_ssl = false)
   {
     if ($pubkey == null || $pubkey == '') {
-      die ("To use reCAPTCHA you must get an API key from <a href='https://www.google.com/recaptcha/admin/create'>https://www.google.com/recaptcha/admin/create</a>");\
+      die ("To use reCAPTCHA you must get an API key from <a href='https://www.google.com/recaptcha/admin/create'>https://www.google.com/recaptcha/admin/create</a>");
     }
 
     if ($use_ssl) {
