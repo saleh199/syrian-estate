@@ -4,7 +4,11 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('home');
+		$this->load->model("property_model");
+
+		$data["featured"] = $this->property_model->getFeaturedProperties();
+
+		$this->load->view('home', $data);
 	}
 }
 
