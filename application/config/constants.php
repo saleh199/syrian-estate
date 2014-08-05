@@ -37,5 +37,13 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
+/**
+ * The reCAPTCHA server URL's
+ */
+define("RECAPTCHA_API_SERVER", "http://www.google.com/recaptcha/api");
+define("RECAPTCHA_API_SECURE_SERVER", "https://www.google.com/recaptcha/api");
+define("RECAPTCHA_VERIFY_SERVER", "www.google.com");
+
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
