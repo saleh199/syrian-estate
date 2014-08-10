@@ -38,16 +38,29 @@
 |
 */
 
-$route['default_controller'] = "home";
+$route['default_controller'] = "site/home";
 $route['404_override'] = '';
 
-$route['user/properties'] = 'user/properties';
-$route['user/properties/add'] = 'user/properties/add';
-$route['user/properties/edit/(:num)'] = 'user/properties/edit/property_id/$1';
+$route['login'] = 'site/login';
+$route['register'] = 'site/register';
 
-$route['property/view/(:num)'] = 'property/view/property_id/$1';
-$route['property/static_img/(:num)'] = 'property/google_static_map/property_id/$1';
+$route['map'] = 'site/map';
+$route['map/search'] = 'site/map/search';
 
+$route['search'] = 'site/search';
+
+$route['user/properties'] = 'site/user/properties';
+$route['user/properties/add'] = 'site/user/properties/add';
+$route['user/properties/edit/(:num)'] = 'site/user/properties/edit/property_id/$1';
+$route['user/properties/upload'] = 'site/user/properties/upload';
+$route['user/profile'] = 'site/user/profile';
+$route['user/profile/edit'] = 'site/user/profile/edit';
+$route['user/profile/password'] = 'site/user/profile/password';
+$route['user/profile/logout'] = 'site/user/profile/logout';
+
+$route['property/view/(:num)'] = 'site/property/view/property_id/$1';
+$route['property/addModal'] = 'site/property/addModal';
+$route['property/static_img/(:num)'] = 'site/property/google_static_map/property_id/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
