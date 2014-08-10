@@ -14,22 +14,22 @@ class Login extends CI_Controller {
 		{
 			$remember = TRUE;
 
-			if ($this->ion_auth_model->login($this->input->post('email'), $this->input->post('password'), $remember, FALSE))
+			if ($this->ion_auth_model->login($this->input->post('email'), $this->input->post('password'), $remember, TRUE))
 			{
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				redirect('admin/dashboard', 'refresh');
 			}
 			else
 			{
 				//if the login was un-successful
 				//redirect them back to the login page
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
+				redirect('admin/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}else{
 			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-			$data["form_action"] = form_open("login", array("method" => "post"));
+			$data["form_action"] = form_open("admin/login", array("method" => "post", "class" => 'form-signin'));
 
 			$data["input_email"] = form_input(array(
 				"type" => "text",
