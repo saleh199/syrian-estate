@@ -951,7 +951,7 @@ class Ion_auth_model extends MY_Model
 	 * @return bool
 	 * @author Mathew
 	 **/
-	public function login($identity, $password, $remember=FALSE)
+	public function login($identity, $password, $remember=FALSE, $admin=FALSE)
 	{
 		$this->trigger_events('pre_login');
 
@@ -984,6 +984,24 @@ class Ion_auth_model extends MY_Model
 			$user = $query->row();
 
 			$password = $this->hash_password_db($user->id, $password);
+
+			if($admin === TRUE){
+				if(!$this->ion_auth->in_group(array('admin', 'zone_manager'), $user->id)){
+					
+					$this->trigger_events('post_login_unsuccessful');
+					$this->set_error('login_unsuccessful');
+
+					return FALSE;
+
+				}
+			}else{
+				if(!$this->ion_auth->in_group(array('members'), $user->id)){
+					$this->trigger_events('post_login_unsuccessful');
+					$this->set_error('login_unsuccessful');
+
+					return FALSE;
+				}
+			}
 
 			if ($password === TRUE)
 			{
