@@ -10,6 +10,11 @@
         		</div>
         	</div>
         	<div class="row">
+                <?php if($message){ ?>
+                <div class="col-md-6">
+                    <div class="alert alert-warning"><?php echo $message; ?></div>
+                </div>
+                <?php } ?>
         		<div class="col-md-12">
         			<div class="main-box clearfix">
         				<header class="main-box-header clearfix">
@@ -18,17 +23,17 @@
         						<a href="<?php echo site_url('admin/properties');?>?status=2" class="btn btn-link"><span class="label label-danger"><i class="glyphicon glyphicon-eye-close"></i></span> مرفوض</a> | 
         						<a href="<?php echo site_url('admin/properties');?>?status=0" class="btn btn-link"><span class="label label-warning"><i class="glyphicon glyphicon-eye-close"></i></span> جديد</a>
         					</div>
-        					<div class="filter-block pull-left">
+        					<!--<div class="filter-block pull-left">
         						<a href="#" class="btn btn-primary pull-left">
         							<i class="fa fa-plus-circle fa-lg"></i> إضافة
         						</a>
-        					</div>
+        					</div> -->
         				</header>
         				<div class="main-box-body clearfix">
         					<table class="table">
         						<thead>
         							<tr>
-        								<th width="5%">#</th>
+        								<th width="10%">#</th>
         								<th width="15%"></th>
         								<th width="30%">العنوان</th>
         								<th>الحالة</th>
@@ -36,6 +41,19 @@
         								<th>تاريخ الإضافة</th>
 	        							<th width="15%"></th>
         							</tr>
+        							<form id="searchfrm" action="<?php echo site_url('admin/properties');?>">
+        							<tr>
+        								<th><input type="text" name="property_id" class="form-control"></th>
+        								<th></th>
+        								<th></th>
+        								<th></th>
+        								<th>
+        									<?php echo $zones_dropdown; ?>
+        								</th>
+        								<th></th>
+        								<th></th>
+        							</tr>
+        							</form>
         						</thead>
         						<tbody>
         						<?php foreach($results as $item) { ?>
@@ -55,14 +73,14 @@
         								<td><?php echo $item->zone->zone_name;?></td>
         								<td><?php echo $item->date_added_human;?></td>
         								<td>
-        									<a href="#" class="table-link">
+        									<a href="<?php echo site_url('admin/properties/update/'.$item->property_id);?>" class="table-link">
         										<span class="fa-stack">
         											<i class="fa fa-square fa-stack-2x"></i>
         											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
         										</span>
         									</a>
 
-        									<a href="#" class="table-link danger">
+        									<a href="<?php echo site_url('admin/properties/delete?property_id='.$item->property_id);?>" class="table-link danger">
         										<span class="fa-stack">
         											<i class="fa fa-square fa-stack-2x"></i>
         											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>

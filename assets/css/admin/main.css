@@ -251,3 +251,17 @@ h1 {
 .table a.table-link.danger {
   color: #E74C3C;
 }
+
+.form-control {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border-color: #E7EBEE;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 13px;
+}
+label {
+  font-weight: 400;
+  font-size: 0.875em;
+}

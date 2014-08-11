@@ -7,6 +7,7 @@ class zone_model extends MY_Model{
 
 	public $before_create = array( "timestampInsert" ); // observer before create row
 	public $before_update = array( "timestampUpdate" ); // observer before 
+	public $after_get = array( "afterGet" ); // observer after get
 
 	protected function timestampInsert($data){
 		$data["date_added"] = $data["date_modified"] = time();
@@ -16,6 +17,15 @@ class zone_model extends MY_Model{
 
 	protected function timestampUpdate($data){
 		$data["date_modified"] = time();
+
+		return $data;
+	}
+
+	protected function afterGet($data){
+		$this->load->helper("date");
+
+		$data->date_added_human = unix_to_human($data->date_added, FALSE);
+		$data->date_modified_human = unix_to_human($data->date_modified, FALSE);
 
 		return $data;
 	}

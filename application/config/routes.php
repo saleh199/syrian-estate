@@ -62,5 +62,9 @@ $route['property/view/(:num)'] = 'site/property/view/property_id/$1';
 $route['property/addModal'] = 'site/property/addModal';
 $route['property/static_img/(:num)'] = 'site/property/google_static_map/property_id/$1';
 
+$route['admin/properties/update/(:num)'] = 'admin/properties/update/property_id/$1';
+
+$route['admin/zone/update/(:num)'] = 'admin/zone/update/zone_id/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

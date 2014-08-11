@@ -14,11 +14,26 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
     <link href="<?php echo base_url('assets/css/bootstrap-rtl.min.css')?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/jquery-ui.css');?>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url('assets/css/admin/main.css');?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="<?php echo base_url("assets/js/jquery-1.11.1.min.js");?>"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="<?php echo base_url("assets/js/bootstrap.min.js");?>"></script>
+    <script type="text/javascript" src="<?php echo base_url("assets/js/docs.min.js");?>"></script>
+
+    <script type="text/javascript" src="<?php echo base_url("assets/js/admin/app.js");?>"></script>
+
+    <script type="text/javascript">
+      app.config = {
+        csrf_token_name : '<?php echo $this->config->item("csrf_token_name"); ?>',
+        sitePath : '<?php echo site_url(); ?>',
+        assetsPath : '<?php echo base_url("assets"); ?>/'
+      };
+    </script>
   </head>
 
   <body>
