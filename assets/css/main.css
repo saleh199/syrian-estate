@@ -330,3 +330,6 @@ a.text-danger:hover{
 	padding: 0 7px;
 	margin-bottom: 9px;
 }
+.media:first-child{
+	margin-top: 15px;
+}
