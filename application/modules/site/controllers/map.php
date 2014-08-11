@@ -86,7 +86,7 @@ class Map extends CI_Controller {
 
 		$filter["status"] = 1;
 
-		$json["results"] = $this->property_model->with('images')->get_many_by($filter);
+		$json["results"] = $this->property_model->with('images')->with('property_type')->get_many_by($filter);
 
 		$this->output->set_content_type("application/json");
 		$this->output->set_output(json_encode($json));

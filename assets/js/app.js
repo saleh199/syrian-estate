@@ -339,10 +339,15 @@ $(function(){
 
 							if(item.map_lat && item.map_lng){
 								infoWindowContent = '<div class="media" style="width:300px;"><a class="pull-right"><img class="media-object" src="'+item.image+'" width="90px"></a><div class="media-body"><h4 class="media-heading">'+item.title+'</h4>السعر: '+item.price+'<br>'+item.description+'<br><a href="'+app.propertyView+'/'+item.property_id+'">تفاصيل الإعلان</a></div></div>';
+								marker_icon = {
+									url : app.config.assetsPath + 'image/markers/'+item.property_type.marker_icon,
+									size: new google.maps.Size(23, 36)
+								};
 								app.addMarker({
 									position : new google.maps.LatLng(item.map_lat, item.map_lng),
 									map: app.map,
-									title : item.title
+									title : item.title,
+									icon : marker_icon
 								}, '', infoWindowContent);
 							}
 						});

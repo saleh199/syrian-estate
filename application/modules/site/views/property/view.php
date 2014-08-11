@@ -45,14 +45,14 @@
                         <div class="row">
                               <div class="col-md-12 image-viewer">
                                     <h4>صور العقار</h4>
-                                    <a href="<?php echo $property_info->image;?>" class="thumbnail" data-lightbox="property-gallery"><img src="<?php echo $property_info->image;?>" width="100%"></a>
+                                    <a href="<?php echo $property_info->image;?>" class="thumbnail" data-lightbox="property-image"><img src="<?php echo $property_info->image;?>" width="100%"></a>
                                     <?php foreach($property_info->images as $image){ ?>
                                     <div class="col-md-4 thumb"><a href="<?php echo $image->image_fullpath;?>" data-lightbox="property-gallery"><img src="<?php echo $image->image_fullpath;?>" class="img-thumbnail"></a></div>
                                     <?php } ?>
                               </div>
                               <div class="col-md-12">
                                     <h4>الموقع على الخريطة</h4>
-                                    <img src="<?php echo $property_info->google_map_static_image; ?>" width="100%" class="img-thumbnail">
+                                    <a href="<?php echo $property_info->google_map_static_image; ?>" data-lightbox="static-map"><img src="<?php echo $property_info->google_map_static_image; ?>" width="100%" class="img-thumbnail"></a>
                               </div>
                         </div>
                   </div>
