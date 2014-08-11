@@ -5,6 +5,7 @@ header {
 }
 footer {
 	background: url(../image/footer-bg.jpg);
+	margin-top: 10px;
 }
 footer .footer-logo{
 	background: url(../image/foot.png) no-repeat center left;

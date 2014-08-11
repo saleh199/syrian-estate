@@ -67,7 +67,7 @@ class property_model extends MY_Model
 		return $data;
 	}
 
-	public function getPropertyList($filter, $order = array('date_added' => 'DESC')){
+	public function getPropertyList($filter, $order = array('date_added' => 'DESC'), $limit = 1000){
 		$results = $this->with('images')
 						->with('property_status')
 						->with('property_type')
@@ -111,8 +111,8 @@ class property_model extends MY_Model
 		return array();
 	}
 
-	public function getFeaturedProperties(){
-		$results = $this->getPropertyList(array("featured" => 1, "status" => 1), array('date_modified' => 'DESC'));
+	public function getFeaturedProperties($limit = 4){
+		$results = $this->getPropertyList(array("featured" => 1, "status" => 1), array('date_modified' => 'DESC'), $limit);
 
 		if($results){
 			return $results;

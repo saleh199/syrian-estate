@@ -44,7 +44,7 @@
                   <div class="search-loader hidden">جاري البحث</div>
       	</div> <!-- /.map-holder -->
 
-      </diyv> <!-- /.main -->
+      </div> <!-- /.main -->
       <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.parseparams.js');?>"></script>
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
       <script type="text/javascript">
