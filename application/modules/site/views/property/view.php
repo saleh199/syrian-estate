@@ -1,4 +1,6 @@
 <?php echo $this->view("layouts/header", array("map" => false)); ?>
+<script type="text/javascript" src="<?php echo base_url('assets/plugin/lightbox/js/lightbox.min.js');?>"></script>
+<?php echo link_tag("assets/plugin/lightbox/css/lightbox.css") . "\n"; ?>
 
       <div class="row main">
 
@@ -43,9 +45,9 @@
                         <div class="row">
                               <div class="col-md-12 image-viewer">
                                     <h4>صور العقار</h4>
-                                    <a href="#" class="thumbnail"><img src="<?php echo $property_info->image;?>" width="100%"></a>
+                                    <a href="<?php echo $property_info->image;?>" class="thumbnail" data-lightbox="property-gallery"><img src="<?php echo $property_info->image;?>" width="100%"></a>
                                     <?php foreach($property_info->images as $image){ ?>
-                                    <div class="col-md-4 thumb"><a href="#"><img src="<?php echo $image->image_fullpath;?>" class="img-thumbnail"></a></div>
+                                    <div class="col-md-4 thumb"><a href="<?php echo $image->image_fullpath;?>" data-lightbox="property-gallery"><img src="<?php echo $image->image_fullpath;?>" class="img-thumbnail"></a></div>
                                     <?php } ?>
                               </div>
                               <div class="col-md-12">
