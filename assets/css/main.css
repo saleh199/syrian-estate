@@ -161,7 +161,7 @@ a.text-danger:hover{
 }
 .menu .nav>li>a:hover, .menu .nav>li>a:focus{
 	background: none;
-	color: #fff;
+	color: #ddd;
 }
 
 .featured-projects .list-group-item:first-child,
@@ -346,4 +346,7 @@ a.text-danger:hover{
 }
 .media:first-child{
 	margin-top: 15px;
+}
+.carousel-indicators{
+	margin-right: -35%;
 }

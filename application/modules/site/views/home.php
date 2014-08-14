@@ -20,61 +20,25 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="list-group" role="tablist">
-						<a href="#project_1" role="tab" data-toggle="tab" class="list-group-item active">مشروع برج الريم</a>
-						<a href="#project_2" role="tab" data-toggle="tab" class="list-group-item">Cras justo odio</a>
-						<a href="#project_3" role="tab" data-toggle="tab" class="list-group-item">Cras justo odio</a>
-						<a href="#project_4" role="tab" data-toggle="tab" class="list-group-item">Cras justo odio</a>
-						<a href="#project_5" role="tab" data-toggle="tab" class="list-group-item">Cras justo odio</a>
+                                    <?php foreach($projects as $project){ ?>
+						<a href="#project_<?php echo $project->project_id;?>" role="tab" data-toggle="tab" class="list-group-item"><?php echo $project->project_name;?></a>
+                                    <?php } ?>
                                     <a href="#project_6" role="tab" data-toggle="tab" class="list-group-item"><span class="glyphicon glyphicon-tower"></span> مشروعك العقاري !!!</a>
 					</div>
 				</div>
 
 				<div class="col-md-9 tab-content">
-					<div class="media tab-pane fade" id="project_1">
-						<a class="pull-right" href="#">
-							<img class="media-object" src="holder.js@200x200" alt="...">
-						</a>
-						<div class="media-body">
-							<h4 class="media-heading">برج الريم</h4>
-							هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.
-						</div>
-					</div>
-                              <div class="media tab-pane fade" id="project_2">
-                                    <a class="pull-right" href="#">
-                                          <img class="media-object" src="holder.js@200x200" alt="...">
+                              <?php foreach($projects as $project){ ?>
+                              <div class="media tab-pane fade" id="project_<?php echo $project->project_id;?>">
+                                    <a class="pull-right" href="<?php echo site_url('project/view/'.$project->project_id);?>">
+                                          <img class="media-object thumbnail" src="<?php echo $project->image;?>" width="200px">
                                     </a>
                                     <div class="media-body">
-                                          <h4 class="media-heading">برج الريم</h4>
-                                          هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.
+                                          <h4 class="media-heading"><?php echo $project->project_name;?></h4>
+                                          <?php echo $project->description;?>
                                     </div>
                               </div>
-                              <div class="media tab-pane fade" id="project_3">
-                                    <a class="pull-right" href="#">
-                                          <img class="media-object" src="holder.js@200x200" alt="...">
-                                    </a>
-                                    <div class="media-body">
-                                          <h4 class="media-heading">برج الريم</h4>
-                                          هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.
-                                    </div>
-                              </div>
-                              <div class="media tab-pane fade" id="project_4">
-                                    <a class="pull-right" href="#">
-                                          <img class="media-object" src="holder.js@200x200" alt="...">
-                                    </a>
-                                    <div class="media-body">
-                                          <h4 class="media-heading">برج الريم</h4>
-                                          هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.
-                                    </div>
-                              </div>
-                              <div class="media tab-pane fade" id="project_5">
-                                    <a class="pull-right" href="#">
-                                          <img class="media-object" src="holder.js@200x200" alt="...">
-                                    </a>
-                                    <div class="media-body">
-                                          <h4 class="media-heading">برج الريم</h4>
-                                          هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.
-                                    </div>
-                              </div>
+                              <?php } ?>
                               <div class="media tab-pane fade" id="project_6">
                                     <div class="media-body text-center">
                                           <h4 class="media-heading">لديك مشروع عقاري و تريد الإعلان عنه ؟</h4>
@@ -108,7 +72,7 @@
 
       </div> <!-- /.main -->
       <script type="text/javascript">
-      $('.featured-projects a.list-group-item:first').tab('show');
+      $('.featured-projects a.list-group-item:first').addClass('active').tab('show');
       $('.featured-projects a.list-group-item').click(function (e) {
             e.preventDefault();
             $(this).tab('show');

@@ -122,7 +122,7 @@
                         </header>
                         <div class="main-box-body clearfix">
                                 <div class="row images-list">
-                                    <?php foreach($project_info->images as $image){ ?>
+                                    <?php foreach($project_info->project_images as $image){ ?>
                                     <div class="col-md-4 image-item">
                                         <div class="thumbnail" data-image-id="<?php echo $image->project_image_id;?>">
                                             <img src="<?php echo $image->image_fullpath;?>" width="164px" height="164px">

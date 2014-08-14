@@ -26,7 +26,7 @@ class Project extends CI_Controller {
 		$zones = $this->zone_model->dropdown();
 		$data['zones_dropdown'] = form_dropdown("zone_id",$zones, ($this->input->get('zone_id')) ? $filter['zone_id'] : '', 'class="form-control" onchange="$(\'#searchfrm\').submit()"');
 
-		$data['results'] = $this->project_model->with('images')->with('zone')->order_by('project_id', 'DESC')->get_many_by($filter);
+		$data['results'] = $this->project_model->with('project_images')->with('zone')->order_by('project_id', 'DESC')->get_many_by($filter);
 		//print "<pre>";var_dump($data['results'][0]);die;
 
 		$this->load->view('project/list', $data);
@@ -46,7 +46,7 @@ class Project extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('zone_model', 'zone');
 
-		$data['project_info'] = $project_info = $this->project_model->with('images')->get($project_id);
+		$data['project_info'] = $project_info = $this->project_model->with('project_images')->get($project_id);
 		
 		if(!$project_info){
 			show_404();
@@ -73,7 +73,7 @@ class Project extends CI_Controller {
 				"map_lat" => $this->input->post('map_lat'),
 				"map_lng" => $this->input->post('map_lng'),
 				"map_zoom" => $this->input->post('map_zoom'),
-				"status" => $this->input->post('status'),
+				//"status" => $this->input->post('status'),
 				"youtube_url" => $this->input->post('youtube_url'),
 				"company_name" => $this->input->post('company_name'),
 				"company_type" => $this->input->post('company_type'),
@@ -212,7 +212,7 @@ class Project extends CI_Controller {
 				"value" => $this->form_validation->set_value('map_zoom', $project_info->map_zoom)
 			));
 
-			$data["input_status_1"] = form_radio(array(
+/*			$data["input_status_1"] = form_radio(array(
 				"name" => "status",
 				"value" => "1",
 				"checked" => $this->form_validation->set_value('status', $project_info->status) == 1
@@ -222,7 +222,7 @@ class Project extends CI_Controller {
 				"name" => "status",
 				"value" => "2",
 				"checked" => $this->form_validation->set_value('status', $project_info->status) == 2
-			));
+			));*/
 
 			$data["form_image_action"] = form_open_multipart(
 				'admin/project/upload',
@@ -240,6 +240,34 @@ class Project extends CI_Controller {
 		}
 
 		$this->load->view('project/form', $data);
+	}
+
+	public function set_status(){
+		if(!$this->input->get('project_id')){
+			show_404();
+		}
+
+		$json = array();
+
+		$project_id = intval($this->input->get('project_id'));
+		$status = intval($this->input->get('status'));
+
+		$this->load->model("project_model");
+
+		$update_data = array(
+			"status" => $status,
+		);
+
+		$this->project_model->protected_attributes = array();
+
+		if($this->project_model->update($project_id, $update_data)){
+			$json['result'] = 'success';
+		}else{
+			$json['result'] = 'fail';
+		}
+
+		$this->output->set_content_type("application/json");
+		$this->output->set_output(json_encode($json));
 	}
 
 	public function delete(){

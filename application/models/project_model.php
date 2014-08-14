@@ -12,7 +12,7 @@ class project_model extends MY_Model
 	public $after_get = array( "afterGet" ); // observer after get
 
 	public $has_many = array(
-		"images" => array("model" => "project_image_model")
+		"project_images" => array("model" => "project_image_model", "primary_key" => "project_id")
 	);
 
 	public $belongs_to = array(
@@ -37,11 +37,11 @@ class project_model extends MY_Model
 		$data->date_added_human = unix_to_human($data->date_added, FALSE);
 		$data->date_modified_human = unix_to_human($data->date_modified, FALSE);
 
-		if(!property_exists($data, 'images')){
+		if(!property_exists($data, 'project_images')){
 			$data->image = base_url('assets/image/not-available.jpg');
 		}else{
-			if(is_array($data->images) && count($data->images) > 0){
-				$data->image = $data->images[0]->image_fullpath;
+			if(is_array($data->project_images) && count($data->project_images) > 0){
+				$data->image = $data->project_images[0]->image_fullpath;
 			}else{
 				$data->image = base_url('assets/image/not-available.jpg');
 			}

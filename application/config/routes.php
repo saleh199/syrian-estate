@@ -64,6 +64,8 @@ $route['property/addModal'] = 'site/property/addModal';
 $route['property/static_img/(:num)'] = 'site/property/google_static_map/property_id/$1';
 
 $route['project'] = 'site/project';
+$route['project/view/(:num)'] = 'site/project/view/project_id/$1';
+$route['project/static_img/(:num)'] = 'site/project/google_static_map/project_id/$1';
 $route['project/success'] = 'site/project/success';
 
 $route['admin/properties/update/(:num)'] = 'admin/properties/update/property_id/$1';

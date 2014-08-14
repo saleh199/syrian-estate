@@ -62,9 +62,9 @@
         								<td><?php echo $item->project_name;?></td>
         								<td>
         								<?php if($item->status == 1){ ?>
-        									<span class="label label-success"><i class="glyphicon glyphicon-eye-open"></i></span>
+        									<a href="javascript:;" class="label label-success status" data-status="2" data-project-id="<?php echo $item->project_id;?>"><i class="glyphicon glyphicon-eye-open"></i></a>
         								<?php }else{ ?>
-        									<span class="label label-warning"><i class="glyphicon glyphicon-eye-close"></i></span>
+        									<a href="javascript:;" class="label label-warning status" data-status="1" data-project-id="<?php echo $item->project_id;?>"><i class="glyphicon glyphicon-eye-close"></i></a>
         								<?php } ?>
         								</td>
         								<td><?php echo $item->zone->zone_name;?></td>
@@ -95,4 +95,30 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+    $('a.status').click(function(){
+            $.ajax({
+                url : '<?php echo site_url("admin/project/set_status");?>',
+                data : 'project_id='+$(this).data('project-id') + '&status=' + $(this).data('status'),
+                context : $(this),
+                complete : function(xhr){
+                    json = xhr.responseJSON;
+
+                    if(json.result == 'success'){
+                        if($(this).data('status') == 1){
+                            $(this).removeClass('label-warning').addClass('label-success');
+                            $(this).find('.glyphicon-eye-close').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open');
+                            $(this).data('status', 2);
+                        }else if($(this).data('status') == 2){
+                            $(this).removeClass('label-success').addClass('label-warning');
+                            $(this).find('.glyphicon-eye-open').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close');
+                            $(this).data('status', 1);
+                        }
+                    }else{
+                        alert('حصل خطأ أثناء عملية التعديل');
+                    }
+                }
+            });
+    });
+    </script>
 <?php $this->view('layouts/footer');?>

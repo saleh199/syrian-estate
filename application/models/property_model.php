@@ -13,7 +13,7 @@ class property_model extends MY_Model
 	public $after_get = array( "afterGet" ); // observer after get
 
 	public $has_many = array(
-		"images" => array("model" => "property_image_model")
+		"images" => array("model" => "property_image_model", "primary_key" => "property_id")
 	);
 
 	public $belongs_to = array(

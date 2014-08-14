@@ -123,7 +123,64 @@ class Project extends CI_Controller {
 	}
 
 	public function view(){
-		$this->load->view('project/view');
+		$params = $this->uri->ruri_to_assoc(3);
+		if(!isset($params['project_id'])){
+			show_404();
+		}
+
+		$this->load->model("project_model");
+
+		$data = array();
+
+		$project_id = intval($params['project_id']);
+
+		$data["project_info"] = $this->project_model->with('project_images')->get($project_id);
+
+		$data["project_info"]->youtube_id = '';
+
+		if($data["project_info"]->youtube_url){
+			preg_match('/[\\?\\&]v=([^\\?\\&]+)/',$data["project_info"]->youtube_url,$matches);
+			$id = $matches[1];
+
+			$data["project_info"]->youtube_id = $id;
+		}
+
+		$this->load->view('project/view', $data);
+	}
+
+	public function google_static_map(){
+		$params = $this->uri->ruri_to_assoc(3);
+		if(!isset($params['project_id'])){
+			show_404();
+		}
+
+		$this->load->model("project_model");
+
+		$project_id = intval($params['project_id']);
+
+		$info = $this->project_model->get($project_id);
+
+		if($info){
+			$this->load->helper('file');
+			$this->load->config('upload', TRUE);
+
+			$google_static_url = 'http://maps.googleapis.com/maps/api/staticmap?markers=color:orange|label:S|'.$info->map_lat.','.$info->map_lng.'&zoom='.($info->map_zoom-1).'&size=400x400&scale=2&format=png32';
+			$google_static_url_hash = md5($google_static_url);
+
+			$image_path = $this->config->item('upload_path', 'upload') . 'projects/' . $project_id . '/'.$google_static_url_hash.'.png';
+
+			if(file_exists($image_path)){
+				$this->output->set_content_type('image/png');
+				$content = read_file($image_path);
+				$this->output->set_output($content);
+			}else{			
+				$content = file_get_contents($google_static_url);
+				write_file($image_path, $content);
+
+				$this->output->set_content_type('image/png');
+				$this->output->set_output($content);
+			}
+		}
 	}
 }
 
