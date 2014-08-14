@@ -2,6 +2,14 @@
 
 class Login extends CI_Controller {
 
+	public function __construct(){
+		parent::__construct();
+
+		if($this->ion_auth->logged_in() && !$this->ion_auth->is_admin()){
+			redirect('user/properties');
+		}
+	}
+
 	public function index()
 	{
 		$data = array();

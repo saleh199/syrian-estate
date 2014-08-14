@@ -10,7 +10,7 @@ class Profile extends CI_Controller {
 		}
 
 		if($this->ion_auth->is_admin()){
-			//redirect('admin/properties');
+			redirect('admin/properties');
 		}
 	}
 

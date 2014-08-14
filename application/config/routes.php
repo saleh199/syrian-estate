@@ -68,6 +68,8 @@ $route['project/view/(:num)'] = 'site/project/view/project_id/$1';
 $route['project/static_img/(:num)'] = 'site/project/google_static_map/project_id/$1';
 $route['project/success'] = 'site/project/success';
 
+
+$route['admin'] = 'admin/login';
 $route['admin/properties/update/(:num)'] = 'admin/properties/update/property_id/$1';
 
 $route['admin/zone/update/(:num)'] = 'admin/zone/update/zone_id/$1';

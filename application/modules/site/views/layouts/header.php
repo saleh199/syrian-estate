@@ -42,7 +42,7 @@
     <div class="container site-wrapper">
       <div class="row user-top">
         <div class="col-md-12">
-          <?php if (!$this->ion_auth->logged_in()){ ?>
+          <?php if (!$this->ion_auth->logged_in() || $this->ion_auth->is_admin()){ ?>
           <a href="<?php echo site_url('login');?>" class="btn btn-link">دخول</a> |
           <a href="<?php echo site_url('register');?>" class="btn btn-link">تسجيل جديد</a>
           <?php }else{ ?>

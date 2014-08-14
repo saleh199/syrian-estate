@@ -43,5 +43,9 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">لوحة التحكم</a>
         </div>
+        <div class="collapse navbar-collapse">
+          <form class="navbar-form navbar-left" role="search"><a class="btn btn-danger navbar-left" href="<?php echo site_url('admin/dashboard/logout');?>">تسحيل خروج</a></form>
+          </ul>
+        </div>
       </div>
     </div>
