@@ -74,6 +74,7 @@ class property_model extends MY_Model
 					   	->with('zone')
 					   	->with('user')
 					   	->order_by($order)
+					   	->limit(4)
 					   	->get_many_by($filter);
 
 		return $results;

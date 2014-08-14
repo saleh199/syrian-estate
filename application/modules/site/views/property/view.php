@@ -26,7 +26,28 @@
                               <div class="col-md-6">
                                     <div class="row">
                                           <p>للتواصل مع المعلن</p>
-                                          <div class="col-md-12"><button type="button" class="btn btn-danger btn-block">عرض رقم الموبايل</button></div>
+                                          <div class="col-md-12">
+                                                <button type="button" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger btn-block">عرض رقم الموبايل</button>
+                                                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                      <div class="modal-dialog modal-sm">
+                                                            <div class="modal-content">
+                                                                  <?php if($this->ion_auth->logged_in()){ ?>
+                                                                  <div class="modal-body">
+                                                                        رقم الهاتف للتواصل مع صاحب الإعلان هو <h4 class="price"><?php echo $property_info->user->phone; ?></h4>
+                                                                  </div>
+                                                                  <?php }else{ ?>
+                                                                  <div class="modal-header">
+                                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                        <h4>تسجيل الدخول</h4>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                        يجب تسجيل الدخول قبل عرض رقم التواصل <a href="<?php echo site_url('login');?>">تسجيل الدخول</a>
+                                                                  </div>
+                                                                  <?php } ?>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                          </div>
                                     </div>
                               </div>
                               <div class="col-md-12">

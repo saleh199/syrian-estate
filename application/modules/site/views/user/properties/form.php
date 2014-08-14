@@ -123,6 +123,8 @@
 
                               <div class="tab-pane" id="images">
                                     <br>
+                                    <p class="text-success"><b>ملاحظة: أول صورة ستحمل هي صورة العقار</b></p>
+                                    <br>
                                     <p class="text-danger"><b>يجب تحميل صورة واحدة على الأقل ليتم عرض العقار</b></p>
                                     <br>
                                     <div class="row images-list">

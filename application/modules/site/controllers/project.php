@@ -99,7 +99,7 @@ class Project extends CI_Controller {
 			$data["input_recaptcha"] = $this->recaptcha->recaptcha_get_html(RECAPTCHA_PUBLIC_KEY);
 		}
 
-		$this->load->view('project', $data);
+		$this->load->view('project/form', $data);
 	}
 
 	public function success(){
@@ -120,6 +120,10 @@ class Project extends CI_Controller {
 		}else{
 			return TRUE;
 		}
+	}
+
+	public function view(){
+		$this->load->view('project/view');
 	}
 }
 

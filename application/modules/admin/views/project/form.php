@@ -1,5 +1,9 @@
 <?php $this->view('layouts/header'); ?>
-
+<script type="text/javascript">
+      app.deleteImage = '<?php echo site_url("admin/project/delete_image");?>';
+      app.uploadImage = '<?php echo site_url("admin/project/upload"); ?>';
+      app.project_id = '<?php echo $project_info->project_id;?>';
+</script>
 <div class="container-fluid">
       <div class="row">
         <?php echo $this->view('layouts/sidebar'); ?>
@@ -111,10 +115,47 @@
                     </div>
                 </div>
                 <?php echo form_close();?>
+                <div class="col-md-7">
+                    <div class="main-box clearfix">
+                        <header class="main-box-header clearfix">
+                            <h2>ألبوم صور المشروع</h2>
+                        </header>
+                        <div class="main-box-body clearfix">
+                                <div class="row images-list">
+                                    <?php foreach($project_info->images as $image){ ?>
+                                    <div class="col-md-4 image-item">
+                                        <div class="thumbnail" data-image-id="<?php echo $image->project_image_id;?>">
+                                            <img src="<?php echo $image->image_fullpath;?>" width="164px" height="164px">
+                                            <a class="text-danger tools-btn remove"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <?php echo $form_image_action; ?>
+                                        <div class="form-group col-md-5">
+                                            <?php echo $input_image; ?>
+                                        </div>
+                                        <div class="form-group col-md-2 text-center">
+                                            <button class="btn btn-primary uploadimg-btn" type="button">تحميل</button>
+                                        </div>
+                                        <div class="col-md-5 text-center">
+                                            <div class="progress hidden" style="margin-top: 7px;">
+                                                <div class="progress-bar "  role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%"></div>
+                                            </div>
+                                        </div>
+                                    <?php echo form_close(); ?>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
         	</div>
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.form.js');?>"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript">
             $(function(){
@@ -143,7 +184,7 @@
                         $("#projectfrm input[name=map_lng]").val(latlng.lng());
                   });
 
-                  //app.imagesManagement('#propertyimagefrm');
+                  app.imagesManagement('#projectimagefrm');
             })
       </script>
 <?php $this->view('layouts/footer');?>

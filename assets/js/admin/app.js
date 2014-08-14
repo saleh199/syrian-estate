@@ -137,13 +137,13 @@ $(function(){
 						})
 					}else if(json.result == 'success'){
 						$form[0].reset();
-						html = '<div class="col-md-3 image-item">';
+						html = '<div class="col-md-4 image-item">';
 						html = html + '<div class="thumbnail" data-image-id="'+json.inserted+'">';
-						html = html + '<img src="'+json.image_src+'" width="147px" height="147px">';
+						html = html + '<img src="'+json.image_src+'" width="164px" height="164px">';
 						html = html + '<a class="text-danger tools-btn remove"><span class="glyphicon glyphicon-trash"></span></a>';
 						html = html + '</div></div>';
 
-						$('#images .images-list').append(html);
+						$('.images-list').append(html);
 					}
 				}
 			});
@@ -160,7 +160,7 @@ $(function(){
 					type : 'POST',
 					url : app.deleteImage,
 					context : $(this),
-					data : 'property_image_id=' + image_id + '&'+app.config.csrf_token_name+'='+$form.find('input[name='+app.config.csrf_token_name+']').val()+'&property_id='+app.property_id,
+					data : 'project_image_id=' + image_id + '&'+app.config.csrf_token_name+'='+$form.find('input[name='+app.config.csrf_token_name+']').val()+'&project_id='+app.project_id,
 					complete: function(xhr){
 						console.log(xhr.responseJSON);
 						json = xhr.responseJSON;

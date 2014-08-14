@@ -46,7 +46,7 @@ class Project extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('zone_model', 'zone');
 
-		$project_info = $this->project_model->get($project_id);
+		$data['project_info'] = $project_info = $this->project_model->with('images')->get($project_id);
 		
 		if(!$project_info){
 			show_404();
@@ -224,6 +224,19 @@ class Project extends CI_Controller {
 				"checked" => $this->form_validation->set_value('status', $project_info->status) == 2
 			));
 
+			$data["form_image_action"] = form_open_multipart(
+				'admin/project/upload',
+				array("id" => "projectimagefrm"),
+				array("project_id" => $project_info->project_id)
+			);
+
+			$data["input_image"] = form_input(array(
+				"type" => "file",
+				"name" => "image_file",
+				"id" => "image_file",
+				"class" => "form-control"
+			));
+
 		}
 
 		$this->load->view('project/form', $data);
@@ -245,6 +258,141 @@ class Project extends CI_Controller {
 		}
 
 		redirect('admin/project');
+	}
+
+	public function upload(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+		}
+
+		$this->load->library("form_validation");
+		$this->load->model('project_image_model', 'project_image');
+		$this->load->model('project_model');
+
+		$project_id = intval($this->input->post('project_id'));
+
+		$project_info = $this->project_model->get($project_id);
+
+		if(!$project_info){
+			show_404();
+		}
+
+		$json = array();
+
+		$this->form_validation->set_rules('image_file', 'الصورة', 'callback__upload_image');
+
+		if ($this->form_validation->run() == TRUE){
+			$uploadData = $this->upload->data();
+			$data = array(
+				"filename"	=>	$uploadData['file_name'],
+				"orig_name"	=>	$uploadData['orig_name'],
+				"project_id" => $project_id,
+			);
+
+			if($inserted = $this->project_image->insert($data)){
+				$upload_path = $this->config->item("upload_path", 'upload');
+
+				$project_directory = $upload_path . 'projects/' . $project_id . '/';
+
+				if(!is_dir($project_directory)){
+					@mkdir($project_directory, 0777, TRUE);
+				}
+
+				if(@copy($uploadData["full_path"], $project_directory . $uploadData['file_name'])){
+					unlink($uploadData["full_path"]);
+				}
+
+				$json["result"] = 'success';
+				$json["inserted"] = $inserted;
+				$json["image_src"] = base_url('assets/upload/projects/'.$project_id . '/'.$uploadData['file_name']);
+			}else{
+				$json["result"] = 'fail';
+				$json["errors"] = array('alert' => 'حدث خطأ أثناء عملية الإضافة');
+			}
+		}else{
+			$json["result"] = 'fail';
+			$json["errors"] = $this->form_validation->error_array();
+		}
+
+		$this->output->set_content_type("application/json");
+		$this->output->set_output(json_encode($json));
+	}
+
+	public function _upload_image(){
+		$this->load->config("upload", TRUE);
+		$this->load->library('upload');
+
+		$config = $this->config->item('upload');
+
+		$config['upload_path']	.= 'tmp/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+
+		if(!is_dir($config['upload_path'])){
+			@mkdir($config['upload_path'], 0777, TRUE);
+		}
+
+		$this->upload->initialize($config);
+
+		if(!$this->upload->do_upload('image_file')){
+			$this->form_validation->set_message('_upload_image', $this->upload->error_msg[0]);
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+
+	public function delete_image(){
+		if(!$this->input->is_ajax_request()){
+			show_404();
+		}
+
+		$this->load->model('project_model');
+		$this->load->model('project_image_model', 'project_image');
+
+		$postData = array();
+
+		if($this->input->post()){
+			$postData = $this->input->post(NULL, TRUE);
+		}
+
+		$project_id = $postData['project_id'];
+
+		$project_info = $this->project_model->get($project_id);
+
+		if(!$project_info){
+			show_404();
+		}
+
+		$json = array();
+		$image_info = $this->project_image->get_by(array(
+			"project_id" => $project_id,
+			"project_image_id" => intval($this->input->post("project_image_id"))));
+
+		if($image_info){
+			if($this->project_image->delete_by(array(
+				"project_id" => $project_id,
+				"project_image_id" => intval($this->input->post("project_image_id"))
+			))){
+				$this->load->config("upload", TRUE);
+
+				$upload_path = $this->config->item('upload_path', 'upload');
+
+				$file_path = $upload_path . 'projects/' . $project_id . '/' . $image_info->filename;
+
+				if(file_exists($file_path)){
+					unlink($file_path);
+				}
+
+				$json['result'] = 'success';
+			}else{
+				$json['result'] = 'fail';
+			}
+		}else{
+			$json['result'] = 'fail';
+		}
+
+		$this->output->set_content_type("application/json");
+		$this->output->set_output(json_encode($json));
 	}
 }
 
