@@ -145,6 +145,7 @@ a.text-danger:hover{
 
 .main {
 	margin-top: 15px;
+	min-height: 400px;
 }
 
 .site-desc .jumbotron {
@@ -240,13 +241,13 @@ a.text-danger:hover{
 }
 
 .map-holder{
-	height: 450px;
+	height: 550px;
 	position: relative;
 }
 .map-holder #map-canvas {
 	z-index: 10;
 	width: 100%;
-	height: 100%;
+	height: 92%;
 }
 .map-holder .search-loader{
 	position: absolute;

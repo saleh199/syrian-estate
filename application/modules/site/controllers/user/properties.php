@@ -124,7 +124,7 @@ class Properties extends CI_Controller {
 		}
 
 		$property_type_data = $this->property_type->dropdown();
-		$data["dropdown_property_type"] = form_dropdown("property_type_id", $property_type_data, '', 'id="property_type" class="form-control"');
+		$data["dropdown_property_type"] = form_dropdown("property_type_id", $property_type_data, $property_type_id, 'id="property_type" class="form-control"');
 
 		if(isset($postData["price"])){
 			$price = $postData["price"];
@@ -142,6 +142,24 @@ class Properties extends CI_Controller {
 			"class"	=> "form-control",
 			"placeholder" => "سعر العقار",
 			"value" => $price
+		));
+
+		if(isset($postData["ref_number"])){
+			$ref_number = $postData["ref_number"];
+		}elseif(isset($property_info->ref_number)){
+			$ref_number = $property_info->ref_number;
+		}else{
+			$ref_number = '';
+		}
+
+
+		$data["input_ref_number"] = form_input(array(
+			"type"	=> "text",
+			"name"	=> "ref_number",
+			"id"	=> "ref_number",
+			"class"	=> "form-control",
+			"placeholder" => "رقم العقار",
+			"value" => $ref_number
 		));
 
 		if(isset($postData["area"])){

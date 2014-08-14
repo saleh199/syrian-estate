@@ -1,5 +1,5 @@
 <?php $this->view('layouts/header'); ?>
-
+<script type="text/javascript" src="<?php echo base_url('assets/plugin/elevateZoom/jquery.elevateZoom-3.0.8.min.js');?>"></script>
 <div class="container-fluid">
       <div class="row">
         <?php echo $this->view('layouts/sidebar'); ?>
@@ -36,6 +36,8 @@
         								<th width="10%">#</th>
         								<th width="15%"></th>
         								<th width="30%">العنوان</th>
+                                        <th></th>
+                                        <th></th>
         								<th>الحالة</th>
     	    							<th>المنطقة</th>
         								<th>تاريخ الإضافة</th>
@@ -47,6 +49,8 @@
         								<th></th>
         								<th></th>
         								<th></th>
+                                        <th></th>
+                                        <th></th>
         								<th>
         									<?php echo $zones_dropdown; ?>
         								</th>
@@ -56,11 +60,14 @@
         							</form>
         						</thead>
         						<tbody>
+
         						<?php foreach($results as $item) { ?>
         							<tr>
         								<td><?php echo $item->property_id;?></td>
         								<td><img src="<?php echo $item->image;?>" width="90px" class="thumbnail"></td>
         								<td><?php echo $item->title;?></td>
+                                        <td><?php echo $item->ref_number;?></td>
+                                        <td><img src="<?php echo base_url('assets/image/kroki.png');?>" data-zoom-image="<?php echo base_url('assets/image/kroki.png');?>" width="90px" class="thumbnail kroki-image"></td>
         								<td>
         								<?php if($item->status == 1){ ?>
         									<span class="label label-success"><i class="glyphicon glyphicon-eye-open"></i></span>
@@ -107,4 +114,9 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+        $(".kroki-image").each(function(s, d){
+            $(d).elevateZoom({scrollZoom : true});
+        });
+    </script>
 <?php $this->view('layouts/footer');?>

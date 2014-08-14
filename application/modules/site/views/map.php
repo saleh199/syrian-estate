@@ -40,6 +40,15 @@
       	</div> <!-- /.search-box -->
 
       	<div class="col-md-9 map-holder">
+                  <div class="row">
+                        <div class="col-md-12">
+                              <ul class="list-inline">
+                                    <?php foreach($type_guids as $type){ ?>
+                                          <li><a href="#property_type_id=<?php echo $type->property_type_id;?>"><img src="<?php echo base_url('assets/image/markers/'.$type->marker_icon);?>" width="15px"> <?php echo $type->property_type_name;?></a></li>
+                                    <?php } ?>
+                              </ul>
+                        </div>
+                  </div>
       		<div id="map-canvas"></div>
                   <div class="search-loader hidden">جاري البحث</div>
       	</div> <!-- /.map-holder -->

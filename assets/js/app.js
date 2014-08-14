@@ -127,6 +127,13 @@ $(function(){
 				}).tooltip('show');
 			}
 
+			if(!form.ref_number.value){
+				jQuery(form.ref_number).parent('div.form-group').addClass('has-error');
+				jQuery(form.ref_number).tooltip({
+					title : 'مطلوب'
+				}).tooltip('show');
+			}
+
 			if(!form.price.value){
 				jQuery(form.price).parent('div.form-group').addClass('has-error');
 				jQuery(form.price).tooltip({
@@ -194,7 +201,9 @@ $(function(){
 							if(index == 'alert'){
 								alert(value);
 							}else{
-								$form.find('#'+index).parent('div.form-group').addClass('has-error');
+								$form.find('#'+index).parent('div.form-group').addClass('has-error').tooltip({
+									title : value
+								}).tooltip('show');
 							}
 						})
 					}else if(json.result == 'success'){

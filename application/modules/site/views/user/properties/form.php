@@ -73,6 +73,13 @@
                                           </div>
 
                                           <div class="form-group">
+                                                <label class="control-label col-md-2">رقم العقار :</label>
+                                                <div class="col-md-6">
+                                                      <?php echo $input_ref_number;?>
+                                                </div>
+                                          </div>
+
+                                          <div class="form-group">
                                                 <label class="control-label col-md-2">مساحة العقار :</label>
                                                 <div class="col-md-6">
                                                       <?php echo $area_input;?>

@@ -22,6 +22,11 @@
                 </div>
 
                 <div class="form-group">
+                  <label class="control-label">رقم العقار</label>
+                  <?php echo $ref_number_input;?>
+                </div>
+
+                <div class="form-group">
                   <label class="control-label">سعر العقار</label>
                   <?php echo $price_input;?>
                 </div>

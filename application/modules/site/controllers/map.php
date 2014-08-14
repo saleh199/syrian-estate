@@ -48,6 +48,8 @@ class Map extends CI_Controller {
 			'placeholder' => 'أقل سعر'
 		));
 
+		$data["type_guids"] = $this->property_type_model->get_all();
+
 
 		$this->load->view('map', $data);
 	}
