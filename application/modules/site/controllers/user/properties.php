@@ -24,15 +24,12 @@ class Properties extends CI_Controller {
 
 		foreach ($results as $index => $item) {
 			$results[$index]->href_edit = site_url('user/properties/edit/'.$item->property_id);
+			$results[$index]->href_delete = site_url('user/properties/delete?property_id='.$item->property_id);
 		}
 
 		$data['results'] = $results;
 
 		$this->load->view('user/properties/list', $data);
-	}
- 
-	public function add(){
-		echo __method__;
 	}
 
 	public function edit(){
@@ -425,6 +422,26 @@ class Properties extends CI_Controller {
 		}else{
 			return TRUE;
 		}
+	}
+
+	public function delete(){
+		if(!$this->input->get('property_id')){
+			show_404();
+		}
+
+		$user_id = $this->session->userdata('user_id');
+
+		$property_id = intval($this->input->get('property_id'));
+
+		$this->load->model("property_model");
+
+		if($this->property_model->delete_by(array("property_id" => $property_id, "user_id" => $user_id))){
+			$this->session->set_flashdata('message', 'تم حذف العقار بنجاح');
+		}else{
+			$this->session->set_flashdata('message', 'حدث خطأ أثناء عملية الحذف');
+		}
+
+		redirect('user/properties');
 	}
 }
 

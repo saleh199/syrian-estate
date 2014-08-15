@@ -25,7 +25,12 @@ class Login extends CI_Controller {
 			if ($this->ion_auth_model->login($this->input->post('email'), $this->input->post('password'), $remember, FALSE))
 			{
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				
+				if($this->input->post('redirect_url')){
+					redirect($this->input->post('redirect_url'), 'refresh');
+				}else{
+					redirect('/', 'refresh');
+				}
 			}
 			else
 			{
@@ -37,7 +42,13 @@ class Login extends CI_Controller {
 		}else{
 			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-			$data["form_action"] = form_open("login", array("method" => "post"));
+			$hidden = array();
+
+			if($this->input->get('redirect_url')){
+				$hidden['redirect_url'] = $this->input->get('redirect_url');
+			}
+
+			$data["form_action"] = form_open("login", array("method" => "post"), $hidden);
 
 			$data["input_email"] = form_input(array(
 				"type" => "text",

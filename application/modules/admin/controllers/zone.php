@@ -16,8 +16,10 @@ class Zone extends CI_Controller {
 
 		$this->load->model('zone_model');
 
+		//var_dump($this->session->flashdata('message'));die;
 
-		$data['message'] = ($this->session->flashdata('message')) ? '' : $this->session->flashdata('message');
+
+		$data['message'] = $this->session->flashdata('message');
 
 
 		$data['results'] = $this->zone_model->order_by('zone_name', 'ASC')->get_many_by($filter);
@@ -62,12 +64,13 @@ class Zone extends CI_Controller {
 				"map_zoom" => $this->input->post('map_zoom'),
 			);
 			
-			$this->zone_model->protected_attributes = array();
+			//$this->zone_model->protected_attributes = array();
 			if($this->zone_model->update($zone_id, $update_data)){
 				redirect('admin/zone', 'refresh');
 			}
 
 		}else{
+
 			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			$data["form_action"] = form_open('admin/zone/update/'.$zone_id, array("id" => "zonefrm"), array("zone_id" => $zone_id));
@@ -182,13 +185,19 @@ class Zone extends CI_Controller {
 
 		$this->load->model("zone_model");
 
-		if($this->zone_model->delete($zone_id)){
-			$this->session->set_flashdata('message', 'تم حذف المنطقة بنجاح');
+		$query = $this->db->select('zone_id')->from('property')->where("zone_id", $zone_id)->get();
+
+		if($query->num_rows() == 0){
+			if($this->zone_model->delete($zone_id)){
+				$this->session->set_flashdata('message', 'تم حذف المنطقة بنجاح');
+			}else{
+				$this->session->set_flashdata('message', 'حدث خطأ أثناء عملية الحذف');
+			}
 		}else{
-			$this->session->set_flashdata('message', 'حدث خطأ أثناء عملية الحذف');
+			$this->session->set_flashdata('message', 'لا يمكن حذف مطنقة تحتوي على عقارات مضافة');
 		}
 
-		redirect('admin/zone');
+		redirect('admin/zone', 'refresh');
 	}
 }
 

@@ -11,6 +11,12 @@
             <?php echo $form_action; ?>
               <div class="col-md-6" style="border-left: 1px solid #CCC;">
                 <p class="text-danger">* جميع الحقول مطلوبة</p>
+
+                <div class="form-group">
+                  <label class="control-label">عنوان الإعلان</label>
+                  <?php echo $title_input;?>
+                </div>
+
                 <div class="form-group">
                   <label class="control-label">حالة العقار</label>
                   <?php echo $property_status_dropdown;?>
@@ -30,14 +36,19 @@
                   <label class="control-label">سعر العقار</label>
                   <?php echo $price_input;?>
                 </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">مساحة العقار</label>
+                  <?php echo $area_input;?>
+                </div>
 
                 <div class="form-group">
                   <label class="control-label">وصف العقار</label>
                   <?php echo $description_input;?>
                 </div>
-              </div>
 
-              <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label">المنطقة</label>
                   <?php echo $zone_dropdown;?>
@@ -61,5 +72,5 @@
           </div>
           <div class="modal-footer">
             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button> -->
-            <button type="button" class="btn btn-primary" id="addpropertybtn">تحديد على الخريطة</button>
+            <button type="button" class="btn btn-primary" id="addpropertybtn">استكمال البيانات</button>
           </div>

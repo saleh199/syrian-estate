@@ -4,7 +4,7 @@ class Property extends CI_Controller {
 
 	public function addModal()
 	{
-		if (!$this->ion_auth->logged_in()){
+		if (!$this->ion_auth->logged_in() || $this->ion_auth->is_admin()){
 			$out = $this->load->view('modal/login', array(), TRUE);
 			print $out;
 			exit;
@@ -21,6 +21,22 @@ class Property extends CI_Controller {
 
 		$property_type_data = $this->property_type->dropdown();
 		$data["property_type_dropdown"] = form_dropdown("property_type_id", $property_type_data, '', 'id="property_type" class="form-control"');
+
+		$data["title_input"] = form_input(array(
+			"type"	=> "text",
+			"name"	=> "title",
+			"id"	=> "title",
+			"class"	=> "form-control",
+			"placeholder" => "عنوان الإعلان",
+		));
+
+		$data["area_input"] = form_input(array(
+			"type"	=> "text",
+			"name"	=> "area",
+			"id"	=> "area",
+			"class"	=> "form-control",
+			"placeholder" => "مساحة العقار",
+		));
 
 		$data["ref_number_input"] = form_input(array(
 			"type"	=> "text",
@@ -92,6 +108,8 @@ class Property extends CI_Controller {
 
 		$json = array();
 
+		$this->form_validation->set_rules('title', 'عنوان الإعلان', 'trim|required');
+		$this->form_validation->set_rules('area', 'مساحة العقار', 'trim|required');
 		$this->form_validation->set_rules('property_status_id', 'حالة العقار', 'trim|required');
 		$this->form_validation->set_rules('property_type_id', 'نوع العقار', 'trim|required');
 		$this->form_validation->set_rules('ref_number', 'رقم العقار', 'xss_clean|required|callback__check_ref_number|is_unique[property.ref_number]');

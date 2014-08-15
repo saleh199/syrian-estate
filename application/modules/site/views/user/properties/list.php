@@ -32,7 +32,7 @@
                                           
                                                 <a href="<?php echo $item->href_edit;?>" class="btn btn-primary btn-sm btn-edit"><span class="glyphicon glyphicon-pencil"></span> تعديل</a>
 
-                                                <button class="btn btn-danger btn-sm btn-delete"><span class="glyphicon glyphicon-remove"></span> حذف</button>
+                                                <a href="<?php echo $item->href_delete;?>" class="btn btn-danger btn-sm btn-delete"><span class="glyphicon glyphicon-remove"></span> حذف</a>
 
                                                 <span class="date-added" dir="ltr">
                                                       <?php if($item->featured){ ?>

@@ -51,6 +51,8 @@ $route['search'] = 'site/search';
 
 $route['user/properties'] = 'site/user/properties';
 $route['user/properties/add'] = 'site/user/properties/add';
+$route['user/properties/delete'] = 'site/user/properties/delete';
+$route['user/properties/delete_image'] = 'site/user/properties/delete_image';
 $route['user/properties/edit/(:num)'] = 'site/user/properties/edit/property_id/$1';
 $route['user/properties/upload'] = 'site/user/properties/upload';
 $route['user/profile'] = 'site/user/profile';

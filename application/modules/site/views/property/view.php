@@ -31,7 +31,7 @@
                                                 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                                       <div class="modal-dialog modal-sm">
                                                             <div class="modal-content">
-                                                                  <?php if($this->ion_auth->logged_in()){ ?>
+                                                                  <?php if($this->ion_auth->logged_in() && !$this->ion_auth->is_admin()){ ?>
                                                                   <div class="modal-body">
                                                                         رقم الهاتف للتواصل مع صاحب الإعلان هو <h4 class="price"><?php echo $property_info->user->phone; ?></h4>
                                                                   </div>
@@ -41,7 +41,7 @@
                                                                         <h4>تسجيل الدخول</h4>
                                                                   </div>
                                                                   <div class="modal-body">
-                                                                        يجب تسجيل الدخول قبل عرض رقم التواصل <a href="<?php echo site_url('login');?>">تسجيل الدخول</a>
+                                                                        يجب تسجيل الدخول قبل عرض رقم التواصل <a href="<?php echo site_url('login').'?redirect_url='.current_url();?>">تسجيل الدخول</a>
                                                                   </div>
                                                                   <?php } ?>
                                                             </div>

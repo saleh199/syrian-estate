@@ -34,7 +34,7 @@
                               <?php echo $input_min_price; ?>
                         </div>
 
-                        <button id="mapsearchbtn" class="btn btn-danger btn-block" type="button">بحث</button>
+                        <button id="mapsearchbtn" class="btn btn-danger btn-block" type="submit">بحث</button>
                   <?php echo form_close(); ?>
 
       	</div> <!-- /.search-box -->

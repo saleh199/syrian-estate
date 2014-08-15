@@ -134,6 +134,20 @@ $(function(){
 				}).tooltip('show');
 			}
 
+			if(!form.title.value){
+				jQuery(form.title).parent('div.form-group').addClass('has-error');
+				jQuery(form.title).tooltip({
+					title : 'مطلوب'
+				}).tooltip('show');
+			}
+
+			if(!form.area.value){
+				jQuery(form.area).parent('div.form-group').addClass('has-error');
+				jQuery(form.area).tooltip({
+					area : 'مطلوب'
+				}).tooltip('show');
+			}
+
 			if(!form.price.value){
 				jQuery(form.price).parent('div.form-group').addClass('has-error');
 				jQuery(form.price).tooltip({
@@ -208,7 +222,7 @@ $(function(){
 						})
 					}else if(json.result == 'success'){
 						app.Modal.modal('hide');
-						location.href = app.userProperties;
+						location.href = app.editUserProperties + '/' + json.inserted;
 					}
 				}
 			});
@@ -376,6 +390,11 @@ $(function(){
 		$('#mapsearchbtn').click(function(){
 			querystring = $form.serialize();
 			location.hash = querystring;
+		});
+
+		$form.submit(function(event){
+			event.preventDefault();
+			$('#mapsearchbtn').click();
 		});
 	}
 

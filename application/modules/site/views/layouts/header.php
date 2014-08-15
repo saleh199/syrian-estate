@@ -32,8 +32,9 @@
         sitePath : '<?php echo site_url(); ?>',
         assetsPath : '<?php echo base_url("assets"); ?>/'
       };
-      <?php if ($this->ion_auth->logged_in()){ ?>
+      <?php if ($this->ion_auth->logged_in() && !$this->ion_auth->is_admin()){ ?>
         app.userProperties = '<?php echo site_url("user/properties");?>';
+        app.editUserProperties = '<?php echo site_url("user/properties/edit");?>';
       <?php } ?>
     </script>
 
