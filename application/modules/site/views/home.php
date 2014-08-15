@@ -23,7 +23,7 @@
                                     <?php foreach($projects as $project){ ?>
 						<a href="#project_<?php echo $project->project_id;?>" role="tab" data-toggle="tab" class="list-group-item"><?php echo $project->project_name;?></a>
                                     <?php } ?>
-                                    <a href="#project_6" role="tab" data-toggle="tab" class="list-group-item"><span class="glyphicon glyphicon-tower"></span> مشروعك العقاري !!!</a>
+                                    <a href="#project_new" role="tab" data-toggle="tab" class="list-group-item"><span class="glyphicon glyphicon-tower"></span> مشروعك العقاري !!!</a>
 					</div>
 				</div>
 
@@ -39,7 +39,7 @@
                                     </div>
                               </div>
                               <?php } ?>
-                              <div class="media tab-pane fade" id="project_6">
+                              <div class="media tab-pane fade" id="project_new">
                                     <div class="media-body text-center">
                                           <h4 class="media-heading">لديك مشروع عقاري و تريد الإعلان عنه ؟</h4>
                                           <hr><br><br><br>
@@ -79,5 +79,13 @@
             $('.featured-projects a.list-group-item').removeClass('active');
             $(this).addClass('active');
       });
+
+      setInterval(function(){
+            if($('.featured-projects a.list-group-item.active').next('.featured-projects a.list-group-item').length > 0){
+                  $('.featured-projects a.list-group-item.active').next('.featured-projects a.list-group-item').click();
+            }else{
+                  $('.featured-projects a.list-group-item:first').click();
+            }
+      }, 6000);
       </script>
     <?php echo $this->view("layouts/footer"); ?>
