@@ -41,8 +41,6 @@
 $route['default_controller'] = "site/home";
 $route['404_override'] = '';
 
-$route['(:any)'] = 'site/pages/view/$1';
-
 $route['login'] = 'site/login';
 $route['register'] = 'site/register';
 
@@ -89,6 +87,8 @@ $route['admin/user/admin'] = 'admin/user/index/user_group/1';
 //$route['admin/user/admin/delete'] = 'admin/user/delete/user_group/1';
 $route['admin/user/admin/insert'] = 'admin/user/insert/user_group/1';
 $route['admin/user/admin/update/(:num)'] = 'admin/user/update/user_group/1/id/$1';
+
+$route['(:any)'] = 'site/pages/view/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
