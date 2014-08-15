@@ -76,5 +76,15 @@ $route['admin/zone/update/(:num)'] = 'admin/zone/update/zone_id/$1';
 
 $route['admin/project/update/(:num)'] = 'admin/project/update/project_id/$1';
 
+$route['admin/user/members'] = 'admin/user/index/user_group/2';
+//$route['admin/user/members/delete'] = 'admin/user/delete/user_group/2';
+$route['admin/user/members/insert'] = 'admin/user/insert/user_group/2';
+$route['admin/user/members/update/(:num)'] = 'admin/user/update/user_group/2/id/$1';
+
+$route['admin/user/admin'] = 'admin/user/index/user_group/1';
+//$route['admin/user/admin/delete'] = 'admin/user/delete/user_group/1';
+$route['admin/user/admin/insert'] = 'admin/user/insert/user_group/1';
+$route['admin/user/admin/update/(:num)'] = 'admin/user/update/user_group/1/id/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
