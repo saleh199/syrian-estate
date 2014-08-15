@@ -70,6 +70,7 @@ $route['project/view/(:num)'] = 'site/project/view/project_id/$1';
 $route['project/static_img/(:num)'] = 'site/project/google_static_map/project_id/$1';
 $route['project/success'] = 'site/project/success';
 
+$route['page/(:any)'] = 'site/pages/view/$1';
 
 $route['admin'] = 'admin/login';
 $route['admin/properties/update/(:num)'] = 'admin/properties/update/property_id/$1';
@@ -87,8 +88,6 @@ $route['admin/user/admin'] = 'admin/user/index/user_group/1';
 //$route['admin/user/admin/delete'] = 'admin/user/delete/user_group/1';
 $route['admin/user/admin/insert'] = 'admin/user/insert/user_group/1';
 $route['admin/user/admin/update/(:num)'] = 'admin/user/update/user_group/1/id/$1';
-
-$route['(:any)'] = 'site/pages/view/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
