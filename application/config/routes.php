@@ -41,6 +41,8 @@
 $route['default_controller'] = "site/home";
 $route['404_override'] = '';
 
+$route['(:any)'] = 'site/pages/view/$1';
+
 $route['login'] = 'site/login';
 $route['register'] = 'site/register';
 
