@@ -81,7 +81,17 @@
                               <div class="col-md-12">
                                     <h4>الموقع على الخريطة</h4>
                                     <a href="<?php echo $property_info->google_map_static_image; ?>" data-lightbox="static-map"><img src="<?php echo $property_info->google_map_static_image; ?>" width="100%" class="img-thumbnail"></a>
+                                    <hr>
                               </div>
+                              <?php if($property_info->ref_number !== NULL){ ?>
+                              <?php if(file_exists('assets/image/ref_image/'.$property_info->ref_number.".png")) { ?>
+                              <div class="col-md-12">
+                                    <h4>المخطط العقاري</h4>
+                                    <a  data-lightbox="tabo-map" href="<?php echo base_url('assets/image/ref_image/'.$property_info->ref_number.".png");?>" data-lightbox="property-gallery"><img src="<?php echo base_url('assets/image/ref_image/'.$property_info->ref_number.".png");?>" width="100%" class="img-thumbnail"></a>
+                                    
+                              </div>
+                              <?php } ?>
+                              <?php } ?>
                         </div>
                   </div>
       	</div> <!-- /.property-view -->

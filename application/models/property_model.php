@@ -26,7 +26,7 @@ class property_model extends MY_Model
 	protected function timestampInsert($data){
 		$data["date_added"] = $data["date_modified"] = time();
 
-		if($data['ref_number'] == ''){
+		if(!isset($data['ref_number']) || $data['ref_number'] == ''){
 			$data['ref_number'] = NULL;
 		}
 

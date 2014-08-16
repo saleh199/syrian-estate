@@ -77,6 +77,12 @@
                                 <?php echo $input_price;?>
                             </div>
 
+                            
+                            <div class="form-group">
+                                <label>رقم العقار</label>
+                                <?php echo $ref_number_input;?>
+                            </div>
+
                             <div class="form-group">
                                 <label>مساحة العقار</label>
                                 <?php echo $input_area;?>

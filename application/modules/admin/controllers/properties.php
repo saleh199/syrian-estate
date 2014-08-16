@@ -75,6 +75,10 @@ class Properties extends CI_Controller {
 		//$this->form_validation->set_rules('map_lng', 'إحداثيات الموقع', 'required');
 		//$this->form_validation->set_rules('map_zoom', 'إحداثيات الموقع', 'required');
 
+		if($this->input->post('ref_number') && $this->input->post('ref_number') !== ''){
+			$this->form_validation->set_rules('ref_number', 'رقم العقار', 'xss_clean|required|callback__check_ref_number|is_unique[property.ref_number]');
+		}
+
 		if ($this->form_validation->run() == TRUE){
 			$update_data = array(
 				"title" => $this->input->post('title', TRUE),
@@ -91,6 +95,7 @@ class Properties extends CI_Controller {
 				"map_zoom" => $this->input->post('map_zoom'),
 				"status" => $this->input->post('status'),
 				"featured" => $this->input->post('featured'),
+				"ref_number" => $this->input->post('ref_number'),
 			);
 			
 			$this->property_model->protected_attributes = array();
@@ -123,6 +128,15 @@ class Properties extends CI_Controller {
 				"class" => "form-control",
 				"placeholder" => "السعر",
 				"value" => $this->form_validation->set_value('price', $property_info->price)
+			));
+
+			$data["ref_number_input"] = form_input(array(
+				"type"	=> "text",
+				"name"	=> "ref_number",
+				"id"	=> "ref_number",
+				"class"	=> "form-control",
+				"placeholder" => "رقم العقار",
+				"value" => $this->form_validation->set_value('ref_number', $property_info->ref_number)
 			));
 
 			$data["input_area"] = form_input(array(
@@ -239,6 +253,19 @@ class Properties extends CI_Controller {
 		}
 
 		redirect('admin/properties');
+	}
+
+	public function _check_ref_number(){
+		$ref_number = $this->input->post('ref_number', TRUE);
+
+		$query = $this->db->select('ref_number')->from('property_reference')->where(array('ref_number' => $ref_number))->get();
+
+		if ($query->num_rows() > 0){
+			return TRUE;
+		}else{
+			$this->form_validation->set_message('_check_ref_number', 'رقم العقار غير مسجل بسجل المصالح العقارية');
+			return FALSE;
+		}
 	}
 }
 
