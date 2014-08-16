@@ -66,7 +66,7 @@
         								<td><?php echo $item->property_id;?></td>
         								<td><img src="<?php echo $item->image;?>" width="90px" class="thumbnail"></td>
         								<td><?php echo $item->title;?></td>
-                                        <td><?php echo $item->ref_number;?></td>
+                                        <td><?php echo $item->ref_number_text;?></td>
                                         <td><img src="<?php echo base_url('assets/image/kroki.png');?>" data-zoom-image="<?php echo base_url('assets/image/kroki.png');?>" width="90px" class="thumbnail kroki-image"></td>
         								<td>
         								<?php if($item->status == 1){ ?>

@@ -7,7 +7,7 @@
       	<div class="col-md-12 property-view">
                   <div class="col-md-9">
                         <div class="page-header">
-                              <h4><?php echo $property_info->title;?></h4>
+                              <h3><?php echo $property_info->title;?> <small>(<?php echo $property_info->ref_number_text; ?>)</small></h3>
                         </div>
                         <div class="row">
                               <div class="col-md-6">
@@ -15,11 +15,15 @@
                                           <dt>السعر : </dt>
                                           <dd><h4 class="price"><?php echo $property_info->price; ?> ل.س</h4></dd>
 
+                                          <?php if($property_info->area){ ?>
                                           <dt>مساحة العقار : </dt>
                                           <dd><b><?php echo $property_info->area; ?></b> متر مربع</dd>
+                                          <?php } ?>
 
+                                          <?php if($property_info->address){ ?>
                                           <dt>عنوان العقار : </dt>
                                           <dd><?php echo $property_info->address; ?></dd>
+                                          <?php } ?>
 
                                     </dl>
                               </div>
@@ -52,12 +56,15 @@
                               </div>
                               <div class="col-md-12">
                                     <dl class="dl-horizontal">
-
+                                          <?php if($property_info->description){ ?>
                                           <dt>تفاصيل الإعلان : </dt>
                                           <dd><?php echo $property_info->description; ?></dd>
+                                          <?php } ?>
 
+                                          <?php if($property_info->services){ ?>
                                           <dt>الخدمات الملحقة : </dt>
                                           <dd><?php echo $property_info->services; ?></dd>
+                                          <?php } ?>
                                     </dl>
                               </div>
                         </div>

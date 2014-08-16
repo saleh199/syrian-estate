@@ -326,7 +326,7 @@ a.text-danger:hover{
 	cursor: pointer;
 }
 
-.property-view .page-header h4{
+.property-view .page-header h4, .property-view .page-header h3{
 	color: #611C6A;
 }
 .property-view .price {

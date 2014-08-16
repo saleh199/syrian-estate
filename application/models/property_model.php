@@ -36,7 +36,7 @@ class property_model extends MY_Model
 	protected function timestampUpdate($data){
 		$data["date_modified"] = time();
 
-		if($data['ref_number'] == ''){
+		if(!isset($data['ref_number']) || $data['ref_number'] == ''){
 			$data['ref_number'] = NULL;
 		}
 
@@ -73,7 +73,9 @@ class property_model extends MY_Model
 		$data->property_view_href = site_url("property/view/" . $data->property_id);
 
 		if($data->ref_number == NULL){
-			$data->ref_number = 'غير موثوق';
+			$data->ref_number_text = 'غير موثوق';
+		}else{
+			$data->ref_number_text = $data->ref_number;
 		}
 
 		return $data;

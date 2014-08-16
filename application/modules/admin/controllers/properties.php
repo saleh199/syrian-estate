@@ -224,6 +224,15 @@ class Properties extends CI_Controller {
 		$this->load->model("property_model");
 
 		if($this->property_model->delete($property_id)){
+			$upload_path = $this->config->item("upload_path", 'upload');
+
+			$property_directory = $upload_path . $property_id . '/';
+
+			if(is_dir($property_directory)){
+				delete_files($property_directory, TRUE);
+				rmdir($property_directory);
+			}
+
 			$this->session->set_flashdata('message', 'تم حذف العقار بنجاح');
 		}else{
 			$this->session->set_flashdata('message', 'حدث خطأ أثناء عملية الحذف');
