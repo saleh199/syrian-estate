@@ -65,9 +65,10 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('last_name', 'الكنية', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('email', 'البريد الإلكتروني', 'trim|required|valid_email');
 		$this->form_validation->set_rules('phone', 'رقم الهاتف', 'trim|required|xss_clean');
+		
 
 		if($this->input->post('password')){
-			$this->form_validation->set_rules('password', 'كلمة المرور', 'required|xss_clean');
+			$this->form_validation->set_rules('password', 'كلمة المرور', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 			$this->form_validation->set_rules('password_confirm', 'تأكيد كلمة المرور', 'trim|required|xss_clean|matches[password]');			
 		}
 
@@ -157,7 +158,7 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('last_name', 'الكنية', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('email', 'البريد الإلكتروني', 'trim|required|valid_email|is_unique[users.email]');
 		$this->form_validation->set_rules('phone', 'رقم الهاتف', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'كلمة المرور', 'required|xss_clean');
+		$this->form_validation->set_rules('password', 'كلمة المرور', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', 'تأكيد كلمة المرور', 'trim|required|xss_clean|matches[password]');
 
 

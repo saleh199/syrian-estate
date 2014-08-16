@@ -26,11 +26,19 @@ class property_model extends MY_Model
 	protected function timestampInsert($data){
 		$data["date_added"] = $data["date_modified"] = time();
 
+		if($data['ref_number'] == ''){
+			$data['ref_number'] = NULL;
+		}
+
 		return $data;
 	}
 
 	protected function timestampUpdate($data){
 		$data["date_modified"] = time();
+
+		if($data['ref_number'] == ''){
+			$data['ref_number'] = NULL;
+		}
 
 		return $data;
 	}
@@ -64,6 +72,10 @@ class property_model extends MY_Model
 
 		$data->property_view_href = site_url("property/view/" . $data->property_id);
 
+		if($data->ref_number == NULL){
+			$data->ref_number = 'غير موثوق';
+		}
+
 		return $data;
 	}
 
@@ -74,7 +86,7 @@ class property_model extends MY_Model
 					   	->with('zone')
 					   	->with('user')
 					   	->order_by($order)
-					   	->limit(4)
+					   	->limit($limit)
 					   	->get_many_by($filter);
 
 		return $results;

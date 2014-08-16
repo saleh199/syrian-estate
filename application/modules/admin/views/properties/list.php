@@ -36,11 +36,11 @@
         								<th width="10%">#</th>
         								<th width="15%"></th>
         								<th width="30%">العنوان</th>
-                                        <th></th>
+                                        <th width="15%"></th>
                                         <th></th>
         								<th>الحالة</th>
     	    							<th>المنطقة</th>
-        								<th>تاريخ الإضافة</th>
+        								<th width="15%">تاريخ الإضافة</th>
 	        							<th width="15%"></th>
         							</tr>
         							<form id="searchfrm" action="<?php echo site_url('admin/properties');?>">
@@ -98,7 +98,7 @@
         						<?php } ?>
         						</tbody>
         					</table>
-        					<ul class="pagination pull-left">
+<!--        					<ul class="pagination pull-left">
         						<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
         						<li><a href="#">1</a></li>
         						<li><a href="#">2</a></li>
@@ -106,7 +106,7 @@
         						<li><a href="#">4</a></li>
         						<li><a href="#">5</a></li>
         						<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-        					</ul>
+        					</ul> -->
         				</div>
         			</div>
         		</div>

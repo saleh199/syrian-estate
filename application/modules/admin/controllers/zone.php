@@ -195,7 +195,7 @@ class Zone extends CI_Controller {
 				$this->session->set_flashdata('message', 'حدث خطأ أثناء عملية الحذف');
 			}
 		}else{
-			$this->session->set_flashdata('message', 'لا يمكن حذف مطنقة تحتوي على عقارات مضافة');
+			$this->session->set_flashdata('message', 'لا يمكن حذف مطنقة تحتوي على عقارات أو مشاريع عقارية');
 		}
 
 		redirect('admin/zone', 'refresh');

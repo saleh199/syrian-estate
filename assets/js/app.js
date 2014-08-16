@@ -127,12 +127,12 @@ $(function(){
 				}).tooltip('show');
 			}
 
-			if(!form.ref_number.value){
+			/*if(!form.ref_number.value){
 				jQuery(form.ref_number).parent('div.form-group').addClass('has-error');
 				jQuery(form.ref_number).tooltip({
 					title : 'مطلوب'
 				}).tooltip('show');
-			}
+			}*/
 
 			if(!form.title.value){
 				jQuery(form.title).parent('div.form-group').addClass('has-error');

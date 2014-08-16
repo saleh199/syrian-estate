@@ -72,8 +72,8 @@ class Properties extends CI_Controller {
 		$this->form_validation->set_rules('area', 'مساحة العقار', 'required|is_natural_no_zero');
 		$this->form_validation->set_rules('description', 'وصف العقار', 'required|trim');
 		$this->form_validation->set_rules('map_lat', 'إحداثيات الموقع', 'required');
-		$this->form_validation->set_rules('map_lng', 'إحداثيات الموقع', 'required');
-		$this->form_validation->set_rules('map_zoom', 'إحداثيات الموقع', 'required');
+		//$this->form_validation->set_rules('map_lng', 'إحداثيات الموقع', 'required');
+		//$this->form_validation->set_rules('map_zoom', 'إحداثيات الموقع', 'required');
 
 		if ($this->form_validation->run() == TRUE){
 			$update_data = array(

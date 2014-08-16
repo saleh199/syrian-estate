@@ -112,11 +112,14 @@ class Property extends CI_Controller {
 		$this->form_validation->set_rules('area', 'مساحة العقار', 'trim|required');
 		$this->form_validation->set_rules('property_status_id', 'حالة العقار', 'trim|required');
 		$this->form_validation->set_rules('property_type_id', 'نوع العقار', 'trim|required');
-		$this->form_validation->set_rules('ref_number', 'رقم العقار', 'xss_clean|required|callback__check_ref_number|is_unique[property.ref_number]');
 		$this->form_validation->set_rules('price', 'سعر العقار', 'trim|required');
 		$this->form_validation->set_rules('description', 'وصع العقار', 'trim|required');
 		$this->form_validation->set_rules('zone_id', 'المنطقة', 'trim|required');
 		$this->form_validation->set_rules('image', 'صورة العقار', 'callback__upload_image');
+
+		if($this->input->post('ref_number') && $this->input->post('ref_number') !== ''){
+			$this->form_validation->set_rules('ref_number', 'رقم العقار', 'xss_clean|required|callback__check_ref_number|is_unique[property.ref_number]');
+		}
 
 		if ($this->form_validation->run() == TRUE){
 			$uploadData = $this->upload->data();

@@ -21,7 +21,7 @@
 $lang['error_csrf'] = 'This form post did not pass our security checks.';
 
 // Login
-$lang['login_heading']         = 'Login';
+$lang['login_heading']         = 'دخول';
 $lang['login_subheading']      = 'Please login with your email/username and password below.';
 $lang['login_identity_label']  = 'Email/Username:';
 $lang['login_password_label']  = 'Password:';
