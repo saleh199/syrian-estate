@@ -42,7 +42,7 @@
         								<td><?php echo $item->id;?></td>
         								<td><?php echo $item->first_name . ' ' . $item->last_name;?></td>
                                         <td><?php echo $item->username ;?></td>
-                                        <td><?php echo $item->email ;?></td>
+                                        <td><a href="mailto:<?php echo $item->email ;?>?from=admin@syrian-estate.com"><?php echo $item->email ;?></a></td>
                                         <td><?php echo $item->phone ;?></td>
         								<td>
         									<a href="<?php echo $update_btn . '/'.$item->id;?>" class="table-link">
