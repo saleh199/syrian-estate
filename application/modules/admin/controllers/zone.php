@@ -186,8 +186,9 @@ class Zone extends CI_Controller {
 		$this->load->model("zone_model");
 
 		$query = $this->db->select('zone_id')->from('property')->where("zone_id", $zone_id)->get();
+		$query_project = $this->db->select('zone_id')->from('project')->where("zone_id", $zone_id)->get();
 
-		if($query->num_rows() == 0){
+		if($query->num_rows() == 0 && $query_project->num_rows() == 0){
 			if($this->zone_model->delete($zone_id)){
 				$this->session->set_flashdata('message', 'تم حذف المنطقة بنجاح');
 			}else{
